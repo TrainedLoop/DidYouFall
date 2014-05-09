@@ -26,7 +26,7 @@ namespace DidYouFall.Models.Repository
         public bool EmailSent { get; set; }
 
         [BelongsTo]
-        public User User { get; set; }
+        public Users User { get; set; }
 
 
     }

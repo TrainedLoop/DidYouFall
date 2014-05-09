@@ -18,7 +18,7 @@ namespace DidYouFall.Models
         {
             if (!ActiveRecordStarter.IsInitialized)
             {
-                ActiveRecordStarter.Initialize(typeof(User).Assembly, ActiveRecordSectionHandler.Instance);
+                ActiveRecordStarter.Initialize(typeof(Users).Assembly, ActiveRecordSectionHandler.Instance);
             }
         }
 

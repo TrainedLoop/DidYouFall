@@ -21,7 +21,7 @@ namespace DidYouFall
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Type[] types = {
-                              typeof(User),
+                              typeof(Users),
                                typeof(Server),
                 };
 

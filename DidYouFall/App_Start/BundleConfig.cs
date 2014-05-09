@@ -18,7 +18,9 @@ namespace DidYouFall.App_Start
                         ));
 
             bundles.Add(new StyleBundle("~/bundles/Css/Layout").Include(
-            "~/Css/Layout/bootstrap.min.css"
+            "~/Css/Layout/bootstrap.min.css",
+            "~/Fonts/font-awesome//css/font-awesome.min.css",
+            "~/Css/Layout/sb-admin.css"
             ));
         }
     }
