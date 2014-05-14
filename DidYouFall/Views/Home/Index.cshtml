@@ -1,7 +1,13 @@
-﻿
+﻿@using Recaptcha.Web.Mvc;
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+@using (Html.BeginForm("teste", "Home"))
+{
+    @Html.Recaptcha()
+    <input type="submit" />
+}
 

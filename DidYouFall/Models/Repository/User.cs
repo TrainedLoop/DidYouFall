@@ -28,17 +28,26 @@ namespace DidYouFall.Models.Repository
         [Property(Column = "Credits")]
         public double Credits { get; set; }
 
-        public static bool LoginUser(string Email, string Password)
+        public static void LoginUser(string Email, string Password)
         {
-            Password = ToolBox.Encryption.MD5(Password);
-            Users query = Users.Queryable.Where(i => i.Email == Email && i.Password == Password).SingleOrDefault();
-            if (query == null)
-            { return false; }
-            HttpCookie MyCookie = new HttpCookie("BarretCookie");
-            MyCookie["Email"] = query.Email;
-            MyCookie.Expires = DateTime.Now.AddDays(1);
-            HttpContext.Current.Response.Cookies.Add(MyCookie);
-            return true;
+            try
+            {
+                Password = ToolBox.Encryption.MD5(Password);
+                Users query = Users.Queryable.Where(i => i.Email == Email && i.Password == Password).SingleOrDefault();
+                if (query == null)
+                    throw new Exception("Email ou senha Invalidos");
+                HttpCookie MyCookie = new HttpCookie("BarretCookie");
+                MyCookie["Email"] = query.Email;
+                MyCookie.Expires = DateTime.Now.AddDays(1);
+                HttpContext.Current.Response.Cookies.Add(MyCookie);
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
         }
 
         public static Users GetLoggedUser()
