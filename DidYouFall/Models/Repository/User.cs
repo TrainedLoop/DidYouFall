@@ -22,11 +22,8 @@ namespace DidYouFall.Models.Repository
         [Property(Column = "Name")]
         public string Name { get; set; }
 
-        [Property(Column = "CPF")]
-        public string CPF { get; set; }
-
-        [Property(Column = "Credits")]
-        public double Credits { get; set; }
+        [Property(Column = "Company")]
+        public string Company { get; set; }
 
         public static void LoginUser(string Email, string Password)
         {

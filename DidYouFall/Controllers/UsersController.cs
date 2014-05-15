@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DidYouFall.Models.Forms;
+using DidYouFall.Models.Repository;
+using Recaptcha.Web;
+using Recaptcha.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace DidYouFall.Controllers
 {
@@ -11,10 +15,52 @@ namespace DidYouFall.Controllers
     {
         //
         // GET: /Users/
-        public ActionResult Register()
+
+        public ActionResult Login(string password, string email)
         {
-            
+            new Login(email, password);
             return View();
         }
-	}
+
+        public ActionResult Register()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Register(string email, string password1, string password2, string name, string company)
+        {
+            try
+            {
+                RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+                if (String.IsNullOrEmpty(recaptchaHelper.Response))
+                    throw new CustomException.Recaptcha("Captcha deve ser preenchido");             
+
+                RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
+
+                if (recaptchaResult != RecaptchaVerificationResult.Success)
+                    throw new CustomException.Recaptcha();               
+
+                new RegisterUser(email, password1, password2, name, company);
+                ViewBag.Success = true;
+                return View();
+            }
+
+            catch (CustomException.Recaptcha ex)
+            {
+                Users model = new Users { Email = email, Name = name, Company = company };
+                ViewBag.Recaptcha = ex.Message;
+                return View(model);
+            }
+
+            catch(Exception ex)
+            {
+                ViewBag.Error = ex;
+                Users model = new Users { Email = email, Name = name, Company = company };
+                return View(model);
+            }
+
+        }
+
+    }
 }

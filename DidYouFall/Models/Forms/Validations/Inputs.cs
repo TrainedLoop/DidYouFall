@@ -26,5 +26,13 @@ namespace DidYouFall.Models.Forms.Validations
             if (!rg.IsMatch(password))
                 throw new Exception("A senha deve ter pelo menos uma letra e um numero");
         }
+        public void PasswordString(string password1, string password2)
+        {
+            Regex rg = new Regex(@"(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,10})$");
+            if (!rg.IsMatch(password1))
+                throw new Exception("A senha deve ter pelo menos uma letra e um numero");
+            if (password1 != password2)
+                throw new Exception("Senha não corresponde");
+        }
     }
 }
