@@ -8,18 +8,40 @@ namespace DidYouFall.Models.Forms
 {
     public class RegisterUser
     {
-        protected RegisterUser() { }
-
-        public RegisterUser(string email, string password1, string password2, string name, string company)
+        public Users User { get; protected set; }
+        public string Error { get;  set; }
+        public RegisterUser()
+        {
+            User = new Users();
+            Error = "";
+        }
+        public void Setup(string email, string password1, string password2, string name, string company)
         {
 
-            Validations.Inputs vldInpt = new Validations.Inputs();
-            Validations.DataBase vldDb = new Validations.DataBase();
-            vldInpt.EmailString(email);
-            vldInpt.PasswordString(password1, password2);
-            vldDb.RegisteredEmail(email);
-            Users user = new Users { Email = email, Name = name, Password = password1, Company = company};
-            user.Save();
+            try
+            {                
+                Validations.Inputs vldInpt = new Validations.Inputs();
+                Validations.DataBase vldDb = new Validations.DataBase();
+                vldInpt.EmailString(email);
+                vldInpt.PasswordString(password1, password2);
+                vldDb.RegisteredEmail(email);
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                User = new Users { Email = email, Name = name,  Company = company };
+                throw;
+            }
+
+          
+        }
+
+        public void Save()
+        {
+            if (!string.IsNullOrEmpty(Error))
+                User.Save();
+            else
+                throw new CustomException.ErrorOnRegister();
         }
     }
 }

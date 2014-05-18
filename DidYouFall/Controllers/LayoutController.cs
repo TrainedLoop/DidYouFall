@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Recaptcha.Web;
-using Recaptcha.Web.Mvc;
-using System.Threading.Tasks;
 
 namespace DidYouFall.Controllers
 {
-    public class HomeController : Controller
+    public class LayoutController : Controller
     {
         //
-        // GET: /Home/
-        public  ActionResult Index()
+        // GET: /Layout/
+        public ActionResult Index()
         {
-
             return View();
         }
-
 	}
 }

@@ -38,15 +38,15 @@ namespace DidYouFall.Models.Forms.Validations.Tests
         [ExpectedException(typeof(Exception), "A senha deve ter pelo menos uma letra e um numero, e entre 4 a 16 characteres")]
         public void PasswordStringTestg_With20Characters()
         {
-            vld.PasswordString("45678910111213141516");
+            vld.PasswordString("45678910111213asdqwe");
             Assert.Fail();
 
         }
+
         [TestMethod()]
         public void PasswordStringTestg_WithOnlyLettersNumbers()
         {
             vld.PasswordString("abcdefg123");
-
         }
     }
 }

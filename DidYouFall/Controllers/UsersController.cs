@@ -30,34 +30,25 @@ namespace DidYouFall.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(string email, string password1, string password2, string name, string company)
         {
+            RegisterUser userToRegister = new RegisterUser();
             try
             {
+                userToRegister.Setup(email, password1, password2, name, company);
+
                 RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
                 if (String.IsNullOrEmpty(recaptchaHelper.Response))
-                    throw new CustomException.Recaptcha("Captcha deve ser preenchido");             
-
+                    throw new CustomException.EmptyRecaptcha();
                 RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
-
                 if (recaptchaResult != RecaptchaVerificationResult.Success)
-                    throw new CustomException.Recaptcha();               
+                    throw new CustomException.Recaptcha();
 
-                new RegisterUser(email, password1, password2, name, company);
-                ViewBag.Success = true;
+                userToRegister.Save();
                 return View();
             }
 
-            catch (CustomException.Recaptcha ex)
-            {
-                Users model = new Users { Email = email, Name = name, Company = company };
-                ViewBag.Recaptcha = ex.Message;
-                return View(model);
-            }
-
-            catch(Exception ex)
-            {
-                ViewBag.Error = ex;
-                Users model = new Users { Email = email, Name = name, Company = company };
-                return View(model);
+            catch (Exception ex)
+            {                
+                return View(userToRegister);
             }
 
         }

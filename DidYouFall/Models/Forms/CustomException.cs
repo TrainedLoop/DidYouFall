@@ -15,12 +15,28 @@ namespace DidYouFall.Models.Forms
             {
             }
 
-            public Recaptcha(string message, Exception inner)
-                : base(message, inner)
+        }
+        public class EmptyRecaptcha : Exception
+        {
+
+            public EmptyRecaptcha(string message = "Captcha deve ser preenchido")
+                : base(message)
             {
             }
 
         }
-      
+
+        public class ErrorOnRegister : Exception
+        {
+
+            public ErrorOnRegister(string message = "Erro no Registro")
+                : base(message)
+            {
+            }
+
+
+
+        }
+
     }
 }
