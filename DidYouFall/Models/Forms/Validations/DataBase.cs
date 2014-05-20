@@ -1,4 +1,4 @@
-﻿using DidYouFall.Models.Repository;
+﻿using DidYouFall.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,14 @@ namespace DidYouFall.Models.Forms.Validations
     {
         public void RegisteredEmail(string email)
         {
-            var user= Users.Queryable.Where(i => i.Email == email).FirstOrDefault();
-            if (user == null)
-                throw new Exception("Usuario já registado");
+
+
+            var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
+            {
+                Users user = session.QueryOver<Users>().Where(i => i.Email == email).SingleOrDefault();
+                if (user != null)
+                    throw new Exception("Usuario já registado");
+            }
         }
     }
 }

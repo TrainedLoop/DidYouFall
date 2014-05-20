@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DidYouFall.Models.Forms;
-using DidYouFall.Models.Repository;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading.Tasks;
@@ -16,11 +15,11 @@ namespace DidYouFall.Controllers
         //
         // GET: /Users/
 
-        public ActionResult Login(string password, string email)
-        {
-            new Login(email, password);
-            return View();
-        }
+        //public ActionResult Login(string password, string email)
+        //{
+        //    new Login(email, password);
+        //    return View();
+        //}
 
         public ActionResult Register()
         {
@@ -47,7 +46,7 @@ namespace DidYouFall.Controllers
             }
 
             catch (Exception ex)
-            {                
+            {
                 return View(userToRegister);
             }
 

@@ -1,8 +1,9 @@
 ﻿@using System.Web.Optimization
 @using DidYouFall.Models
-@using DidYouFall.Models.Repository
+@using DidYouFall.Models.Utilities
+@using DidYouFall.Repository
 @{
-    Users LoggedUser = Users.GetLoggedUser();
+    Users LoggedUser = UsersUtilities.GetLoggedUser();
 }
 <!DOCTYPE html>
 <html>
