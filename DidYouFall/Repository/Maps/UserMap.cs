@@ -6,11 +6,11 @@ using System.Web;
 
 namespace DidYouFall.Repository.Maps
 {
-    public class UsersMap : ClassMap<Users>
+    public class UserMap : ClassMap<User>
     {
-        public UsersMap()
+        public UserMap()
          {
-			Table("users");
+			Table("user");
 			LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id");
 			Map(x => x.Email).Column("Email");

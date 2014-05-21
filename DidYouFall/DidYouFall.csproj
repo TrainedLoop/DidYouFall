@@ -126,19 +126,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Forms\CustomException.cs" />
+    <Compile Include="Models\Forms\Login.cs" />
     <Compile Include="Models\Forms\RegisterUser.cs" />
     <Compile Include="Models\Forms\Validations\DataBase.cs" />
     <Compile Include="Models\Forms\Validations\Inputs.cs" />
     <Compile Include="Models\ProjectConfigs.cs" />
     <Compile Include="Repository\Maps\ServerMap.cs" />
-    <Compile Include="Repository\Maps\UsersMap.cs" />
+    <Compile Include="Repository\Maps\UserMap.cs" />
     <Compile Include="Repository\Server.cs" />
-    <Compile Include="Repository\Users.cs" />
+    <Compile Include="Repository\User.cs" />
     <Compile Include="Models\Utilities\UsersUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolBox\Encryption.cs" />
@@ -156,8 +157,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

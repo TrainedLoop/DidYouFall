@@ -14,7 +14,7 @@ namespace DidYouFall.Models.Forms.Validations
 
             var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
             {
-                Users user = session.QueryOver<Users>().Where(i => i.Email == email).SingleOrDefault();
+                User user = session.QueryOver<User>().Where(i => i.Email == email).SingleOrDefault();
                 if (user != null)
                     throw new Exception("Usuario já registado");
             }

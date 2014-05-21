@@ -9,18 +9,18 @@ namespace DidYouFall.Models.Forms
 {
     public class RegisterUser
     {
-        public Users User { get; protected set; }
+        public User User { get; protected set; }
         public string Error { get; set; }
         public RegisterUser()
         {
-            User = new Users();
+            User = new User();
             Error = "";
         }
         public void Setup(string email, string password1, string password2, string name, string company)
         {
             try
             {
-                User = new Users { Email = email, Name = name, Company = company, Password = ToolBox.Encryption.MD5(password1) };
+                User = new User { Email = email, Name = name, Company = company, Password = ToolBox.Encryption.MD5(password1) };
                 Validations.Inputs vldInpt = new Validations.Inputs();
                 Validations.DataBase vldDb = new Validations.DataBase();
                 vldInpt.EmailString(email);
@@ -31,7 +31,7 @@ namespace DidYouFall.Models.Forms
             catch (Exception ex)
             {
                 Error = ex.Message;
-                User = new Users { Email = email, Name = name, Company = company };
+                User = new User { Email = email, Name = name, Company = company };
                 throw;
             }
         }

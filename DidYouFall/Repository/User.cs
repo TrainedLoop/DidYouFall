@@ -5,9 +5,9 @@ using System.Web;
 
 namespace DidYouFall.Repository
 {
-    public class Users
+    public class User
     {
-        public Users() { }
+        public User() { }
         public virtual int Id { get; set; }
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }

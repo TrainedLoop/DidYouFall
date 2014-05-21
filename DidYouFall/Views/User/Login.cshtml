@@ -1,0 +1,55 @@
+﻿@using System.Web.Optimization
+@using Recaptcha.Web.Mvc;
+@Scripts.Render("~/bundles/Js/Layout")
+@Styles.Render("~/bundles/Css/Layout")
+@model DidYouFall.Models.Forms.Login
+@{
+    Layout = "";
+    DidYouFall.Models.Forms.Login login = Model ?? new DidYouFall.Models.Forms.Login();
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Login</h3>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                    {
+                        if (!String.IsNullOrEmpty(login.Error))
+                        {
+                            <div class="alert alert-dismissable alert-danger">
+                                @login.Error
+                            </div>
+                        }
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" name="email" autofocus="" value="@login.Email" type="email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" value="" type="password">
+                            </div>
+                            @if (login.RecaptchaTime())
+                            {
+                                <div>
+                                    <label>Captcha</label>
+                                    @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                                </div>
+                            }
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" value="Remember Me" type="checkbox">Lembrar-Me
+                                </label>
+                            </div>
+
+                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
