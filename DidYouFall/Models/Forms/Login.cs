@@ -29,18 +29,18 @@ namespace DidYouFall.Models.Forms
         }
         public bool RecaptchaTime()
         {
-            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["BarretCookieTryLogin"];
-            return MyCookie == null? false : int.Parse(MyCookie["Trys"])>3;
+            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["BarretCookie"];
+            return MyCookie == null ? false : int.Parse(MyCookie["LoginTrys"]) > 3;
         }
 
         private void TryCookie()
         {
-            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["BarretCookieTryLogin"];
-            if (MyCookie == null)
-                MyCookie = new HttpCookie("BarretCookieTryLogin");
-            MyCookie["Trys"] = MyCookie["Trys"] == null ? "1" : ((int.Parse(MyCookie["Trys"]) + 1).ToString());
-            MyCookie.Expires = DateTime.Now.AddHours(1);
-            HttpContext.Current.Response.Cookies.Add(MyCookie);
+            HttpCookie TryCookie = HttpContext.Current.Request.Cookies["CookieDidYouFall"];
+            if (TryCookie == null)
+                TryCookie = new HttpCookie("CookieDidYouFall");
+            TryCookie.Values["LoginTrys"] = TryCookie.Values["LoginTrys"] == null ? "1" : ((int.Parse(TryCookie["Trys"]) + 1).ToString());
+            TryCookie.Expires = DateTime.Now.AddHours(1);
+            HttpContext.Current.Response.Cookies.Add(TryCookie);
         }
 
     }

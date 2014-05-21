@@ -12,15 +12,16 @@ namespace DidYouFall.Models.Utilities
         const int ValidateCookieTimes = 1; // In Days
         public static User GetLoggedUser()
         {
-            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["BarretCookie"];
-            if (MyCookie == null)
+            string cookieEmail;
+            try
+            {
+                cookieEmail = HttpContext.Current.Request.Cookies.Get("CookieDidYouFall").Values.Get("email");
+                var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
+                return section.QueryOver<User>().Where(i => i.Email == cookieEmail).SingleOrDefault();
+            }
+            catch (NullReferenceException)
             {
                 return null;
-            }
-            else
-            {
-                var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
-                return section.QueryOver<User>().Where(i => i.Email == MyCookie["Email"]).SingleOrDefault();
             }
 
         }
@@ -36,10 +37,10 @@ namespace DidYouFall.Models.Utilities
                 User query = section.QueryOver<User>().Where(i => i.Email == email && i.Password == ToolBox.Encryption.MD5(password)).SingleOrDefault();
                 if (query == null)
                     throw new Exception();
-                HttpCookie MyCookie = new HttpCookie("BarretCookie");
-                MyCookie["Email"] = query.Email;
-                MyCookie.Expires = DateTime.Now.AddDays(ValidateCookieTimes);
-                HttpContext.Current.Response.Cookies.Add(MyCookie);
+                SetLoginCookie(email);
+                var cookieEmail = HttpContext.Current.Request.Cookies.Get("CookieDidYouFall").Values.Get("email");
+
+
             }
             catch (Exception)
             {
@@ -49,16 +50,33 @@ namespace DidYouFall.Models.Utilities
         }
         public static void Logoff()
         {
-            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["BarretCookie"];
+            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["CookieDidYouFall"];
             var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
-            if (MyCookie != null)
+            if (MyCookie["email"] != null)
             {
                 User query = section.QueryOver<User>().Where(i => i.Email == MyCookie["Email"]).SingleOrDefault();
-                MyCookie["Email"] = query.Email;
+                MyCookie.Values["Email"] = query.Email;
                 MyCookie.Expires = DateTime.Now.AddMilliseconds(500);
                 HttpContext.Current.Response.Cookies.Add(MyCookie);
             }
 
         }
+
+
+        public static void SetLoginCookie(string email)
+        {
+            HttpCookie LoginCookie = HttpContext.Current.Request.Cookies["CookieDidYouFall"];
+            if (LoginCookie == null)
+                LoginCookie = new HttpCookie("CookieDidYouFall");
+            LoginCookie.Values["LoginTrys"] = email;
+            LoginCookie.Expires = DateTime.Now.AddHours(1);
+            HttpContext.Current.Response.Cookies.Add(LoginCookie);
+        }
+
+
+       
+
+
+        
     }
 }
