@@ -31,6 +31,7 @@ namespace DidYouFall
                 ("Server=localhost;Database=didyoufall;Uid=root;Pwd=admin;").ShowSql().FormatSql())
                 .Mappings(i => i.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
                 .ExposeConfiguration(c => c.SetProperty("current_session_context_class", "web"))
+                .ExposeConfiguration(c => c.Properties.Add("hbm2ddl.keywords", "none"))
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(true, true))
                 .BuildSessionFactory();
 
