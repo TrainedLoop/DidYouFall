@@ -10,7 +10,7 @@ namespace DidYouFall.Models.Forms
         public class Recaptcha : Exception
         {
 
-            public Recaptcha(string message = "Captcha deve ser preenchido corretamente")
+            public Recaptcha(string message = "Captcha deve ser preenchido ")
                 : base(message)
             {
             }

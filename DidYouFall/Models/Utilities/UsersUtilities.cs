@@ -15,7 +15,7 @@ namespace DidYouFall.Models.Utilities
             string cookieEmail;
             try
             {
-                cookieEmail = HttpContext.Current.Request.Cookies.Get("CookieDidYouFall").Values.Get("email");
+                cookieEmail = HttpContext.Current.Request.Cookies["DidYouFallLogin"]["email"];
                 var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
                 return section.QueryOver<User>().Where(i => i.Email == cookieEmail).SingleOrDefault();
             }
@@ -38,9 +38,6 @@ namespace DidYouFall.Models.Utilities
                 if (query == null)
                     throw new Exception();
                 SetLoginCookie(email);
-                var cookieEmail = HttpContext.Current.Request.Cookies.Get("CookieDidYouFall").Values.Get("email");
-
-
             }
             catch (Exception)
             {
@@ -50,7 +47,7 @@ namespace DidYouFall.Models.Utilities
         }
         public static void Logoff()
         {
-            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["CookieDidYouFall"];
+            HttpCookie MyCookie = HttpContext.Current.Request.Cookies["DidYouFallLogin"];
             var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
             if (MyCookie["email"] != null)
             {
@@ -61,22 +58,14 @@ namespace DidYouFall.Models.Utilities
             }
 
         }
-
-
-        public static void SetLoginCookie(string email)
+        private static void SetLoginCookie(string email)
         {
-            HttpCookie LoginCookie = HttpContext.Current.Request.Cookies["CookieDidYouFall"];
-            if (LoginCookie == null)
-                LoginCookie = new HttpCookie("CookieDidYouFall");
-            LoginCookie.Values["LoginTrys"] = email;
-            LoginCookie.Expires = DateTime.Now.AddHours(1);
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Request.Cookies.Clear();
+            var LoginCookie = new HttpCookie("DidYouFallLogin");
+            LoginCookie.Values["email"] = email;
+            LoginCookie.Expires = DateTime.Now.AddDays(ValidateCookieTimes);
             HttpContext.Current.Response.Cookies.Add(LoginCookie);
         }
-
-
-       
-
-
-        
     }
 }

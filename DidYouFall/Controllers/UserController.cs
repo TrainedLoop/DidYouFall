@@ -13,13 +13,8 @@ namespace DidYouFall.Controllers
 {
     public class UserController : Controller
     {
-        //
-        // GET: /Users/
-
-
         public ActionResult Register()
         {
-
             return View();
         }
         [HttpPost]
@@ -29,28 +24,22 @@ namespace DidYouFall.Controllers
             try
             {
                 userToRegister.Setup(email, password1, password2, name, company);
-
                 RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
                 if (String.IsNullOrEmpty(recaptchaHelper.Response))
                     throw new CustomException.EmptyRecaptcha();
                 RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
                 if (recaptchaResult != RecaptchaVerificationResult.Success)
                     throw new CustomException.Recaptcha();
-
                 userToRegister.Save();
                 return View();
             }
-
             catch (Exception ex)
             {
                 if (ex is CustomException.EmptyRecaptcha || ex is CustomException.Recaptcha)
                     userToRegister.Error = ex.Message;
                 return View(userToRegister);
             }
-
         }
-
-
         public ActionResult Login()
         {
             return View();
@@ -71,7 +60,6 @@ namespace DidYouFall.Controllers
                     if (recaptchaResult != RecaptchaVerificationResult.Success)
                         throw new CustomException.Recaptcha();
                 }
-
                 login.LoginUser(email, password);
             }
 
@@ -81,7 +69,7 @@ namespace DidYouFall.Controllers
                     login.Error = ex.Message;
                 return View(login);
             }
-            return View("Home");
+            return Redirect("/home/index");
         }
     }
 }
