@@ -48,11 +48,8 @@ namespace DidYouFall.Models.Utilities
         public static void Logoff()
         {
             HttpCookie MyCookie = HttpContext.Current.Request.Cookies["DidYouFallLogin"];
-            var section = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
-            if (MyCookie["email"] != null)
+            if (MyCookie != null)
             {
-                User query = section.QueryOver<User>().Where(i => i.Email == MyCookie["Email"]).SingleOrDefault();
-                MyCookie.Values["Email"] = query.Email;
                 MyCookie.Expires = DateTime.Now.AddMilliseconds(500);
                 HttpContext.Current.Response.Cookies.Add(MyCookie);
             }

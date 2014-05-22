@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -20,6 +21,8 @@ namespace DidYouFall.Models.Forms.Validations
             //Password
             public const string PasswordInvalid = "A senha deve ter pelo menos uma letra e um numero de 4 a 16 caracteres";
             public const string PasswordNotSame = "Senhas não correspondem";
+            //IP
+            public const string IPInvalid = "Senhas não correspondem";
         }
 
         public void EmailString(string email)
@@ -45,6 +48,13 @@ namespace DidYouFall.Models.Forms.Validations
                 throw new Exception(ErrorMessages.PasswordInvalid);
             if (password1 != password2)
                 throw new Exception(ErrorMessages.PasswordNotSame);
+        }
+
+        public void IPString(string ip)
+        {
+            IPAddress address;
+            if (!IPAddress.TryParse(ip, out address))
+                throw new Exception(ErrorMessages.IPInvalid);
         }
     }
 }

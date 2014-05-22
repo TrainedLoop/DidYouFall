@@ -14,10 +14,12 @@ namespace DidYouFall.Repository.Maps
             LazyLoad();
             Id(x => x.Id).GeneratedBy.Identity().Column("Id");
             References(x => x.Users).Column("User");
+            Map(x => x.Name).Column("Name");
             Map(x => x.Host).Column("Host");
             Map(x => x.Verificationtime).Column("VerificationTime");
             Map(x => x.Contactemail).Column("ContactEmail");
             Map(x => x.Emailsent).Column("EmailSent");
+            HasMany(x => x.Ports).Element("Ports").AsBag();
         }
     }
 }

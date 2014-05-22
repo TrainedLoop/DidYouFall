@@ -1,14 +1,9 @@
 ﻿@using System.Web.Optimization
 @using Recaptcha.Web.Mvc;
-@Scripts.Render("~/bundles/Js/Layout")
-@Styles.Render("~/bundles/Css/Layout")
 @model DidYouFall.Models.Forms.Login
 @{
-    Layout = "";
     DidYouFall.Models.Forms.Login login = Model ?? new DidYouFall.Models.Forms.Login();
 }
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">

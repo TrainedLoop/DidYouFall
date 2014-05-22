@@ -8,6 +8,7 @@ using DidYouFall.Models;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading.Tasks;
+using DidYouFall.Models.Utilities;
 
 namespace DidYouFall.Controllers
 {
@@ -71,5 +72,13 @@ namespace DidYouFall.Controllers
             }
             return Redirect("/home/index");
         }
+
+
+        public ActionResult Logoff()
+        {
+            UsersUtilities.Logoff();
+            return Redirect("/home/index");
+        }
+
     }
 }
