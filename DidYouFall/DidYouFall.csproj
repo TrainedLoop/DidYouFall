@@ -113,15 +113,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Css\Layout\AdminLTE.css" />
     <Content Include="Css\Layout\bootstrap.min.css" />
-    <Content Include="Css\Layout\sb-admin.css" />
-    <Content Include="Fonts\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Fonts\font-awesome.min.css" />
+    <Content Include="Css\Layout\ionicons.min.css" />
+    <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\ionicons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="JavaScripts\Layout\app.js" />
     <Content Include="JavaScripts\Layout\bootstrap.min.js" />
-    <Content Include="JavaScripts\Layout\jquery-1.10.2.js" />
-    <Content Include="JavaScripts\Layout\sb-admin.js" />
+    <Content Include="JavaScripts\Layout\jquery-ui-1.10.3.min.js" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -153,13 +155,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="Fonts\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
@@ -167,6 +162,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Server\Register.cshtml" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\ionicons.eot" />
+    <Content Include="Fonts\ionicons.ttf" />
+    <Content Include="Fonts\ionicons.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

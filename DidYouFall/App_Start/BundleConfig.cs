@@ -12,15 +12,17 @@ namespace DidYouFall.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/Js/Layout").Include(
-                        "~/JavaScripts/Layout/jquery-1.10.2.js",
+                        "~/JavaScripts/Layout/jquery-ui-1.10.3.min.js",
                         "~/JavaScripts/Layout/bootstrap.min.js",
-                        "~/JavaScripts/Layout/sb-admin.js"
+                        "~/JavaScripts/Layout/app.js"
                         ));
 
             bundles.Add(new StyleBundle("~/bundles/Css/Layout").Include(
             "~/Css/Layout/bootstrap.min.css",
-            "~/Fonts/font-awesome//css/font-awesome.min.css",
-            "~/Css/Layout/sb-admin.css"
+            "~/Fonts/font-awesome.min.css",
+            "~/Css/Layout/ionicons.min.css",            
+            "~/Css/Layout/AdminLTE.css"
+
             ));
         }
     }

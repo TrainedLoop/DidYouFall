@@ -4,47 +4,135 @@
 @{
     DidYouFall.Models.Forms.Login login = Model ?? new DidYouFall.Models.Forms.Login();
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Login</h3>
-                </div>
-                <div class="panel-body">
-                    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+
+@*<div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box box-header">
+                <h3 class="box-title">
+                    Entrar
+                </h3>
+            </div>
+            <form role="form">
+                <div class="box-body">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="E-mail" name="email" autofocus="" value="@login.Email" type="email">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Password" name="password" value="" type="password">
+                    </div>
+                    @if (login.RecaptchaTime())
                     {
-                        if (!String.IsNullOrEmpty(login.Error))
+                        <div>
+                            <label>Captcha</label>
+                            @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                        </div>
+                    }
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary" type="submit"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    ===================================<br />
+    <br />
+    <br />
+    <br />*@
+
+<div class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Entrar</h3>
+            @if (!String.IsNullOrEmpty(login.Error))
+            {
+                <div class="alert alert-dismissable alert-danger">
+                    @login.Error
+                </div>
+            }
+        </div>
+        @using (Html.BeginForm("Login"))
+        {
+            <div class="box-body">
+
+                <div class="form-group">
+                    <input class="form-control" placeholder="E-mail" name="email" autofocus="" value="@login.Email" type="email">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Password" name="password" value="" type="password">
+                </div>
+                <div class="form-group" style="float:right">
+                    <input type="checkbox">
+                    <label>Lembrar</label>
+                </div>
+                @if (login.RecaptchaTime())
+                {
+                    <div>
+                        <label>Captcha</label>
+                        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                    </div>
+                }
+
+            </div>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@*<div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Login", "User", FormMethod.Post))
                         {
-                            <div class="alert alert-dismissable alert-danger">
-                                @login.Error
-                            </div>
-                        }
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" autofocus="" value="@login.Email" type="email">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" value="" type="password">
-                            </div>
-                            @if (login.RecaptchaTime())
+                            if (!String.IsNullOrEmpty(login.Error))
                             {
-                                <div>
-                                    <label>Captcha</label>
-                                    @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                                <div class="alert alert-dismissable alert-danger">
+                                    @login.Error
                                 </div>
                             }
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" value="Remember Me" type="checkbox">Lembrar-Me
-                                </label>
-                            </div>
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="E-mail" name="email" autofocus="" value="@login.Email" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" value="" type="password">
+                                </div>
+                                @if (login.RecaptchaTime())
+                                {
+                                    <div>
+                                        <label>Captcha</label>
+                                        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                                    </div>
+                                }
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" value="Remember Me" type="checkbox">Lembrar-Me
+                                    </label>
+                                </div>
 
-                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
-                        </fieldset>
-                    }
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
+                            </fieldset>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
