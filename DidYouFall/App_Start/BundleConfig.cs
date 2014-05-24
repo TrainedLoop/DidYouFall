@@ -17,6 +17,12 @@ namespace DidYouFall.App_Start
                         "~/JavaScripts/Layout/app.js"
                         ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Js/Plugins/IpMask").Include(
+            "~/JavaScripts/Plugins/jquery-1.11.1.min.js",
+            "~/JavaScripts/Plugins/Mask/IpMaskInt.js",
+            "~/JavaScripts/Plugins/Mask/mask-plugin.js"
+            ));
+
             bundles.Add(new StyleBundle("~/bundles/Css/Layout").Include(
             "~/Css/Layout/bootstrap.min.css",
             "~/Fonts/font-awesome.min.css",
