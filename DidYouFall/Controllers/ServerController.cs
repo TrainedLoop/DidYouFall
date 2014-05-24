@@ -17,5 +17,14 @@ namespace DidYouFall.Controllers
 
             return View();
         }
+
+        //[HttpPost]
+        //public ActionResult Register()
+        //{
+        //    if (UsersUtilities.GetLoggedUser() == null)
+        //        return Redirect("~/User/Login");
+
+        //    return View();
+        //}
 	}
 }

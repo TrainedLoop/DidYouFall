@@ -17,14 +17,14 @@
 <body class="skin-blue">
 
     <header class="header">
-        <a href="../../index.html" class="logo">
-            AdminLTE
+        <a href="~/Home" class="logo">
+            @ProjectConfigs.ProjectName
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             @if (LoggedUser != null)
             {
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Alternar navegação</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -66,66 +66,8 @@
             </div>
         </nav>
     </header>
-
-
-    @*@*//////////////////////////////////////////////////////MENU\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*@
-    @*<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" style="color:#1B77C5;" href="~/home/index">
-                    @ProjectConfigs.ProjectName
-                </a>
-                <i class="fa fa-leaf fa-fw navbar-brand" style="color:#1B77C5;">
-                </i>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                @{if (LoggedUser == null)
-                {
-
-                    <li>
-                        <a href="~/User/Register">
-                            <i class="fa fa-user fa-fw"></i> Cadastre-se
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-cog fa-fw"></i> Como Funciona
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/User/Login">
-                            <i class="fa fa-mail-forward fa-fw"></i> Login
-                        </a>
-                    </li>
-
-                }
-                else
-                {
-                    <li>
-                        <a href="~/User/Logoff">
-                            <i class="fa fa-mail-forward fa-fw"></i> Sair
-                        </a>
-                    </li>
-                }
-                }
-            </ul>
-        </nav>*@
-
-
-
-    <div id="page-wrapper" style="@(LoggedUser==null?  "margin: 0px 0px 0px 0px;" : "")">
-        <br />
-        <br />
-        <div class=" row">
-            <div class="col-lg-12">
-                @RenderBody()
-            </div>
-        </div>
+    <div class="col-lg-12" style="margin-top:2%">
+        @RenderBody()
     </div>
 </body>
 @Scripts.Render("~/bundles/Js/Layout")

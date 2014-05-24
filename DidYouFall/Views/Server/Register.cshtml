@@ -43,6 +43,10 @@
                     <label>Tempo de verificação</label>
                     <input value="@toRegister.Server.Verificationtime" required class="form-control">
                 </div>
+                <div class="form-group">
+                    <label>Confirmação</label>
+                    @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.White)
+                </div>
             </div>
             <div class="box-footer" style="padding-left:75%">
                 <input type="submit" value="Confirmar" class="btn btn-primary" />
