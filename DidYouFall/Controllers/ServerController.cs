@@ -68,5 +68,6 @@ namespace DidYouFall.Controllers
                 return Redirect("~/User/Login");
             return Json(ServerUtilities.CheckServer(server), JsonRequestBehavior.AllowGet);
         }
+       
     }
 }

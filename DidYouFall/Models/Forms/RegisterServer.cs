@@ -26,14 +26,14 @@ namespace DidYouFall.Models.Forms
                 vldInpt.IPString(host);
                 vldInpt.EmailString(contactemail);
                 vldDb.RegisteredHostOnUser(host, loggedUser);
-                Server = new Server { Name = name, Host = host, Emailsent = false, Verificationtime = verificationtime, Contactemail = contactemail, User = loggedUser };
+                Server = new Server { Name = name, Host = host, Emailsent = false, CheckTime = Times.Cinco_minutos, Contactemail = contactemail, User = loggedUser };
 
             }
             catch (Exception ex)
             {
                 Error = ex.Message;
                 Success = false;
-                Server = new Server { Host = host, Emailsent = false, Verificationtime = verificationtime, Contactemail = contactemail };
+                Server = new Server { Host = host, Emailsent = false, CheckTime = Times.Cinco_minutos, Contactemail = contactemail };
                 throw;
             }
         }

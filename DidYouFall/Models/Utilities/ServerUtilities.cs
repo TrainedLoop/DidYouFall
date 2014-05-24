@@ -30,6 +30,7 @@ namespace DidYouFall.Models.Utilities
             };
         }
 
+
         public class PingReply
         {
             public string HostResponse { get; set; }
@@ -37,4 +38,5 @@ namespace DidYouFall.Models.Utilities
             public string Status { get; set; }
         }
     }
+
 }

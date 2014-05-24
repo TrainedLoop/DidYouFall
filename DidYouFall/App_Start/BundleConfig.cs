@@ -31,6 +31,12 @@ namespace DidYouFall.App_Start
             "~/JavaScripts/Plugins/Mask/IpMaskInt.js",
             "~/JavaScripts/Plugins/Mask/mask-plugin.js"
             ));
+
+            //SERVER REGISTER
+            bundles.Add(new ScriptBundle("~/bundles/Js/Plugins/Countdown").Include(
+            "~/JavaScripts/Plugins/Countdown/countdown.js",
+            "~/JavaScripts/Plugins/Countdown/HostTableInit.js"
+            ));
         }
     }
 }

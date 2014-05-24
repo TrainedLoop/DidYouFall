@@ -16,7 +16,8 @@ namespace DidYouFall.Repository.Maps
             References(x => x.User);
             Map(x => x.Name).Column("Name");
             Map(x => x.Host).Column("Host");
-            Map(x => x.Verificationtime).Column("VerificationTime");
+            Map(x => x.LastCheck).Column("LastCheck");
+            Map(x => x.CheckTime).Column("CheckTime").CustomType<int>();
             Map(x => x.Contactemail).Column("ContactEmail");
             Map(x => x.Emailsent).Column("EmailSent");
             HasMany(x => x.Ports).Element("Ports").AsBag();

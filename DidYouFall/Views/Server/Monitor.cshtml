@@ -1,21 +1,41 @@
 ﻿@model List<DidYouFall.Repository.Server>
+
+    Countdown until 2050
+<h1 id="countdown-holder"></h1>
+
+@section plugins
+{
+    @System.Web.Optimization.Scripts.Render("~/bundles/Js/Plugins/Countdown")
+
+}
+
+
+
+
+
+
+
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Servidores</h3>
     </div>
     <div class="box-body">
         <table class="table table-bordered">
-            <tbody>
+            <thead>
                 <tr>
                     <th>Name</th>
                     <th>Host</th>
                     <th>UpTime</th>
                     <th style="width: 100px">Status</th>
-                    <th style="width: 100px">Next Scan</th>
+                    <th style="width: 100px">Ultima Checagem</th>
+                    <th style="width: 100px">Proxima Checagem</th>
                 </tr>
+            </thead>
+            <tbody id="Hosts">
+
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="linha">
                         <td>@item.Name</td>
                         <td>@item.Host</td>
                         <td>
@@ -29,8 +49,9 @@
                             </span>
                         </td>
                         <td>
-                            0:56
+                            @DateTime.Now.ToLongTimeString()
                         </td>
+                        <td><span>@((int)item.CheckTime)</span></td>
                     </tr>
                 }
 
@@ -38,12 +59,5 @@
         </table>
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
     </div>
 </div>
