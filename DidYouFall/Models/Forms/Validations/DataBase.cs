@@ -19,5 +19,17 @@ namespace DidYouFall.Models.Forms.Validations
                     throw new Exception("Usuario já registado");
             }
         }
+
+        public void RegisteredHostOnUser(string host, User loggedUser)
+        {
+
+
+            var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
+            {
+                Server server = session.QueryOver<Server>().Where(i => i.Host == host && i.User == loggedUser).SingleOrDefault();
+                if (server != null)
+                    throw new Exception("Host já registrado");
+            }
+        }
     }
 }

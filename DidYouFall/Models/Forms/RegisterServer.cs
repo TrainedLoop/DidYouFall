@@ -10,12 +10,14 @@ namespace DidYouFall.Models.Forms
     {
         public Server Server { get; protected set; }
         public string Error { get; set; }
+        public bool Success { get; set; }
         public RegisterServer()
         {
             Server = new Server();
+            Success = false;
         }
 
-        public void Setup(string host, string contactemail, int verificationtime)
+        public void Setup(string name, string host, string contactemail, int verificationtime, User loggedUser)
         {
             try
             {
@@ -23,12 +25,14 @@ namespace DidYouFall.Models.Forms
                 Validations.DataBase vldDb = new Validations.DataBase();
                 vldInpt.IPString(host);
                 vldInpt.EmailString(contactemail);
-                Server = new Server { Host = host, Emailsent = false, Verificationtime = verificationtime, Contactemail = contactemail };
+                vldDb.RegisteredHostOnUser(host, loggedUser);
+                Server = new Server { Name = name, Host = host, Emailsent = false, Verificationtime = verificationtime, Contactemail = contactemail, User = loggedUser };
 
             }
             catch (Exception ex)
             {
                 Error = ex.Message;
+                Success = false;
                 Server = new Server { Host = host, Emailsent = false, Verificationtime = verificationtime, Contactemail = contactemail };
                 throw;
             }
@@ -41,6 +45,7 @@ namespace DidYouFall.Models.Forms
                 {
                     var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
                     session.Save(Server);
+                    Success = true;
                 }
                 else
                     throw new CustomException.ErrorOnRegister();

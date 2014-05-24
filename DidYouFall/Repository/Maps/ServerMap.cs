@@ -13,7 +13,7 @@ namespace DidYouFall.Repository.Maps
             Table("server");
             LazyLoad();
             Id(x => x.Id).GeneratedBy.Identity().Column("Id");
-            References(x => x.Users).Column("User");
+            References(x => x.User);
             Map(x => x.Name).Column("Name");
             Map(x => x.Host).Column("Host");
             Map(x => x.Verificationtime).Column("VerificationTime");

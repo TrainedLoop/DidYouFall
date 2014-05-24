@@ -123,7 +123,6 @@
     <Content Include="Global.asax" />
     <Content Include="JavaScripts\Layout\app.js" />
     <Content Include="JavaScripts\Layout\bootstrap.min.js" />
-    <Content Include="JavaScripts\Layout\jquery-ui-1.10.3.min.js" />
     <Content Include="JavaScripts\Layout\jquery-1.11.1.min.js" />
     <Content Include="JavaScripts\Plugins\Mask\IpMaskInt.js" />
     <Content Include="JavaScripts\Plugins\Mask\mask-plugin.js" />
@@ -147,6 +146,7 @@
     <Compile Include="Models\Forms\Validations\DataBase.cs" />
     <Compile Include="Models\Forms\Validations\Inputs.cs" />
     <Compile Include="Models\ProjectConfigs.cs" />
+    <Compile Include="Models\Utilities\ServerUtilities.cs" />
     <Compile Include="Repository\Maps\ServerMap.cs" />
     <Compile Include="Repository\Maps\UserMap.cs" />
     <Compile Include="Repository\Server.cs" />
@@ -175,6 +175,7 @@
     <Content Include="Fonts\ionicons.eot" />
     <Content Include="Fonts\ionicons.ttf" />
     <Content Include="Fonts\ionicons.woff" />
+    <Content Include="Views\Server\Monitor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
