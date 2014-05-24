@@ -124,7 +124,7 @@
     <Content Include="JavaScripts\Layout\app.js" />
     <Content Include="JavaScripts\Layout\bootstrap.min.js" />
     <Content Include="JavaScripts\Layout\jquery-ui-1.10.3.min.js" />
-    <Content Include="JavaScripts\Plugins\jquery-1.11.1.min.js" />
+    <Content Include="JavaScripts\Layout\jquery-1.11.1.min.js" />
     <Content Include="JavaScripts\Plugins\Mask\IpMaskInt.js" />
     <Content Include="JavaScripts\Plugins\Mask\mask-plugin.js" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
