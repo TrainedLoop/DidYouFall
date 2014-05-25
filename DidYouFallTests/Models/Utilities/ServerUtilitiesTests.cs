@@ -15,21 +15,21 @@ namespace DidYouFall.Models.Utilities.Tests
         [TestMethod()]
         public void CheckServerTest_GoogleTest()
         {
-            var a = ServerUtilities.CheckServer(new Server { Host = "google.com" });
-            Assert.AreEqual(IPStatus.Success.ToString(), a.Status);
+            var a = ServerUtilities.SendPing("google.com");
+            Assert.AreEqual("Online", a.Status);
         }
          [TestMethod()]
         public void CheckServerTest_LocalTest()
         {
-            var a = ServerUtilities.CheckServer(new Server{ Host ="localhost"});
-            Assert.AreEqual(IPStatus.Success.ToString(), a.Status);
+            var a = ServerUtilities.SendPing("localhost");
+            Assert.AreEqual("Online", a.Status);
         }
 
         [TestMethod()]
          public void CheckServerTest_ToOfflineHost()
          {
-             var a = ServerUtilities.CheckServer(new Server{ Host ="10.0.0.50"});
-             Assert.AreEqual(IPStatus.TimedOut.ToString(), a.Status);
+             var a = ServerUtilities.SendPing("10.0.0.50");
+             Assert.AreEqual("Offline", a.Status);
          }
     }
 }

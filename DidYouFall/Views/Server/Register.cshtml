@@ -1,6 +1,6 @@
 ﻿@using DidYouFall.Models.Forms;
-@model RegisterServer
 @using Recaptcha.Web.Mvc;
+@model RegisterServer
 @{
     RegisterServer toRegister = Model ?? new RegisterServer();
 }
@@ -23,10 +23,10 @@
                 @if (Model != null)
                 {
                     if (Model.Success)
-                    { 
+                    {
                         <div class="callout callout-info">
                             <i class="fa fa-ban"></i>
-                            <b>Salvo com sucesso</b>r
+                            <b>Salvo com sucesso!</b>
                         </div>
                     }
                     else
@@ -47,11 +47,17 @@
                 </div>
                 <div class="form-group">
                     <label>Email para contato</label>
-                    <input value="@toRegister.Server.Contactemail" type="email"  name="contactEmail" required class="form-control">
+                    <input value="@toRegister.Server.Contactemail" type="email" name="contactEmail" required class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Tempo de verificação</label>
-                    <input value="@toRegister.Server.CheckTime" type="number" name="verificationTime" required class="form-control">
+                    <select name="verificationTime" class="form-control">
+                        @foreach (var item in Enum.GetValues(typeof(DidYouFall.Repository.Times)))
+                        {
+                            <option value="@((int)item)">@item.ToString().Replace("_", " ")</option>
+                        }
+                    </select>
+                    @*<input value="@toRegister.Server.CheckTime" type="number" name="verificationTime" required class="form-control">*@
                 </div>
                 <div class="form-group">
                     <label>Confirmação</label>

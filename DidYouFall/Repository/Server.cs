@@ -24,7 +24,7 @@ namespace DidYouFall.Repository
         Trinta_minutos = 30,
         Uma_hora = 60,
         Uma_hora_e_meia = 90,
-        Suas_horas = 120,
+        Duas_horas = 120,
         Três_horas = 180,
     }
 }

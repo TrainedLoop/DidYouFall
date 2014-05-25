@@ -23,7 +23,7 @@ namespace DidYouFall.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> Register(string name, string host, string contactEmail, int verificationTime)
+        public async Task<ActionResult> Register(string name, string host, string contactEmail, Times verificationTime)
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
@@ -40,7 +40,7 @@ namespace DidYouFall.Controllers
                 //if (recaptchaResult != RecaptchaVerificationResult.Success)
                 //    throw new CustomException.Recaptcha();
                 ServerToRegister.Save();
-                return View();
+                return View(ServerToRegister);
             }
             catch (Exception ex)
             {
@@ -62,11 +62,12 @@ namespace DidYouFall.Controllers
 
 
 
-        public ActionResult CheckOneServer(Server server)
+        public ActionResult CheckOneServer(string host)
         {
-            if (UsersUtilities.GetLoggedUser() == null)
+            var loggedUser = UsersUtilities.GetLoggedUser();
+            if (loggedUser == null)
                 return Redirect("~/User/Login");
-            return Json(ServerUtilities.CheckServer(server), JsonRequestBehavior.AllowGet);
+            return Json(ServerUtilities.CheckServer(loggedUser,host), JsonRequestBehavior.AllowGet);
         }
        
     }

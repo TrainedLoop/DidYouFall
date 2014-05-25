@@ -17,16 +17,22 @@ namespace DidYouFall.Models.Utilities
             return servers;  
         }
 
-        public static PingReply CheckServer(Server server)
+        public static PingReply CheckServer(User LoggedUser, string host)
+        {
+            return SendPing(host);
+        }
+
+        public static PingReply SendPing(string host)
         {
             Ping ping = new Ping();
 
-            var reply = ping.Send(server.Host);
+            var reply = ping.Send(host, 2000);
 
-            return new PingReply {
-                HostResponse = reply.Address==null? "":reply.Address.ToString(),
+            return new PingReply
+            {
+                HostResponse = reply.Address == null ? "" : reply.Address.ToString(),
                 Latency = reply.RoundtripTime,
-                Status = reply.Status.ToString()
+                Status = reply.Status == IPStatus.Success ? "Online" : reply.Status == IPStatus.TimedOut ? "Offline" : reply.Status.ToString()
             };
         }
 

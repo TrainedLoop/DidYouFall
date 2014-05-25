@@ -1,19 +1,43 @@
 ﻿@model List<DidYouFall.Repository.Server>
-
-    Countdown until 2050
-<h1 id="countdown-holder"></h1>
-
 @section plugins
 {
     @System.Web.Optimization.Scripts.Render("~/bundles/Js/Plugins/Countdown")
+    <script>
+        $("#Hosts > tr").each(
+              function (i, el) {
+                  var $host = $(this).find(".Host");
+                  var $timer = $(this).find(".Timer").children();
+                  var $status = $(this).find(".Status").children();
+                  var $latency = $(this).find(".Latency").children();
+                  var $response = $(this).find(".Response").children();
+                  var plusminutes = parseInt($timer.html());
+                  var now = new Date(Date.now());
+                  now = now.setMinutes(now.getMinutes() + plusminutes);
+                  setInterval(function () {
+                      $timer.html(countdown(now).toString());
+                      if ($timer.html() == "1 ") {
+                          var url = "/server/CheckOneServer?host=" + $host.html().toString();
+                          $.getJSON(url, function (data) {
+                              if (data.Status.toString() == "Online") {
+                                  $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
+                                  $latency.html(data.Latency.toString() + " millesec").removeClass();
+                                  $response.html(data.HostResponse.toString()).removeClass();
+                              }
+                              else {
+                                  $status.html(data.Status.toString()).removeClass().addClass('badge bg-red');
+                                  $latency.html("Offline").removeClass().addClass('badge bg-red');
+                                  $response.html("Offline").removeClass().addClass('badge bg-red');
+                              }
 
+                          });
+                          now = new Date(Date.now());
+                          now = now.setMinutes(now.getMinutes() + plusminutes);
+                          $timer.html(countdown(now).toString());
+                      }
+                  }, 1000);
+              });
+    </script>
 }
-
-
-
-
-
-
 
 <div class="box">
     <div class="box-header">
@@ -27,6 +51,8 @@
                     <th>Host</th>
                     <th>UpTime</th>
                     <th style="width: 100px">Status</th>
+                    <th style="width: 100px">Latencia</th>
+                    <th style="width: 100px">Ip Resposta</th>
                     <th style="width: 100px">Ultima Checagem</th>
                     <th style="width: 100px">Proxima Checagem</th>
                 </tr>
@@ -35,15 +61,25 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr id="linha">
+                    <tr>
                         <td>@item.Name</td>
-                        <td>@item.Host</td>
+                        <td class="Host">@item.Host</td>
                         <td>
                             <div class="progress xs">
                                 <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
                             </div>
                         </td>
-                        <td>
+                        <td class="Status">
+                            <span class="badge bg-gray">
+                                Não Verificado
+                            </span>
+                        </td>
+                        <td class="Latency">
+                            <span class="badge bg-gray">
+                                Não Verificado
+                            </span>
+                        </td>
+                        <td class="Response">
                             <span class="badge bg-gray">
                                 Não Verificado
                             </span>
@@ -51,7 +87,7 @@
                         <td>
                             @DateTime.Now.ToLongTimeString()
                         </td>
-                        <td><span>@((int)item.CheckTime)</span></td>
+                        <td class="Timer"><span>@((int)item.CheckTime)</span></td>
                     </tr>
                 }
 
