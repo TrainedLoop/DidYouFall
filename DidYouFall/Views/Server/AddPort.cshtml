@@ -2,60 +2,132 @@
 
 
 
-
-@*<div class="inner">
-            <h3>
-                150
-            </h3>
-            <p>
-                New Orders
-            </p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-bag"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-            More info <i class="fa fa-arrow-circle-right"></i>
-        </a>
-    </div>*@
-
 @foreach (var item in Model.Servers)
 {
-    <div class="col-lg-3">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">
-                    Host: @item.Name
-                </h3>
-            </div>
-            <div class="box-body">
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label>IP: @item.Host</label>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Ultimo status verificado: @item.LastStatus</label>
-                    </div>
-                </div>
+    <div class="col-lg-4">
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3>
+                            @item.Name
+                        </h3>
+                        <p>
+                            IP: @item.Host
+                        </p>
+                        <p>Ultima Verificação: @item.LastCheck</p>
 
-                <div class="form-group">
-                    <div class="col-lg-2">
-                        <label>
-                            Porta
-                        </label>
+                        <span class="badge @(item.LastStatus=="Online"? "bg-green":"bg-red")">@(item.LastStatus??"Não Verificado")</span>
+
+
                     </div>
                     <div class="col-lg-6">
-                        <input type="text" class="form-control input-sm" />
+                        <div class="icon" style="position:relative;float:right;">
+                            <i class="fa fa-desktop"></i>
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <button class="btn btn-default">Adcionar</button>
+
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="small-box-footer">
+                Portas
+            </div>
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
+                    </div>
+                    <div class="col-lg-3">
+                        2555:aksodka
                     </div>
                 </div>
-                <p>Portas Abertas</p>
+            </div>
+            <div class="inner">
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" placeholder="8080" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="submit" class="btn-success btn-sm" value="Add" />
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="col-lg-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Host: @item.Name
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>IP: @item.Host</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ultimo status verificado: @item.LastStatus</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="icon">
+                            <i class="fa fa-desktop fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
 
 }
 
