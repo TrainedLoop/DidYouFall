@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Forms\AddPort.cs" />
     <Compile Include="Models\Forms\CustomException.cs" />
     <Compile Include="Models\Forms\Login.cs" />
     <Compile Include="Models\Forms\RegisterServer.cs" />
@@ -177,6 +178,7 @@
     <Content Include="Fonts\ionicons.ttf" />
     <Content Include="Fonts\ionicons.woff" />
     <Content Include="Views\Server\Monitor.cshtml" />
+    <Content Include="Views\Server\AddPort.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

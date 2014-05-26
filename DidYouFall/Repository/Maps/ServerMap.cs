@@ -19,7 +19,7 @@ namespace DidYouFall.Repository.Maps
             Map(x => x.LastCheck).Column("LastCheck");
             Map(x => x.CheckTime).Column("CheckTime").CustomType<int>();
             Map(x => x.Contactemail).Column("ContactEmail");
-            Map(x => x.Emailsent).Column("EmailSent");
+            Map(x => x.LastStatus).Column("LastStatus");
             HasMany(x => x.Ports).Element("Ports").AsBag();
         }
     }

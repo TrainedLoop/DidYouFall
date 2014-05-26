@@ -50,6 +50,7 @@ namespace DidYouFall
         protected void Application_EndRequest(object sender, EventArgs e)
         {
             var session = CurrentSessionContext.Unbind(SessionFactory);
+            session.Flush();
             session.Dispose();
 
         }

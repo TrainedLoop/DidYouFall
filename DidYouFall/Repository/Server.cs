@@ -13,7 +13,7 @@ namespace DidYouFall.Repository
         public virtual Times CheckTime { get; set; }
         public virtual DateTime LastCheck { get; set; }
         public virtual string Contactemail { get; set; }
-        public virtual bool Emailsent { get; set; }
+        public virtual string LastStatus { get; set; }
         public virtual IList<int> Ports { get; set; }
         public virtual User User { get; set; }
     }

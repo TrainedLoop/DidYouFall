@@ -33,12 +33,12 @@ namespace DidYouFall.Controllers
             try
             {
                 ServerToRegister.Setup(name, host, contactEmail, verificationTime, loggedUser);
-                //RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
-                //if (String.IsNullOrEmpty(recaptchaHelper.Response))
-                //    throw new CustomException.EmptyRecaptcha();
-                //RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
-                //if (recaptchaResult != RecaptchaVerificationResult.Success)
-                //    throw new CustomException.Recaptcha();
+                RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+                if (String.IsNullOrEmpty(recaptchaHelper.Response))
+                    throw new CustomException.EmptyRecaptcha();
+                RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
+                if (recaptchaResult != RecaptchaVerificationResult.Success)
+                    throw new CustomException.Recaptcha();
                 ServerToRegister.Save();
                 return View(ServerToRegister);
             }
@@ -48,6 +48,14 @@ namespace DidYouFall.Controllers
                     ServerToRegister.Error = ex.Message;
                 return View(ServerToRegister);
             }
+        }
+
+        public ActionResult AddPort()
+        {
+            var loggedUser = UsersUtilities.GetLoggedUser();
+            if (loggedUser == null)
+                return Redirect("~/User/Login");
+            return View(new AddPort(loggedUser));
         }
 
         public ActionResult Monitor()
