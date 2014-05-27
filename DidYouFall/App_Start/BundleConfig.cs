@@ -22,7 +22,8 @@ namespace DidYouFall.App_Start
             "~/Css/Layout/bootstrap.min.css",
             "~/Fonts/font-awesome.min.css",
             "~/Css/Layout/ionicons.min.css",            
-            "~/Css/Layout/AdminLTE.css"
+            "~/Css/Layout/AdminLTE.css",
+            "~/Css/Layout/Custom.css"
 
             ));
 

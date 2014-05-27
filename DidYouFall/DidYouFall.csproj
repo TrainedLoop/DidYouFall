@@ -115,6 +115,7 @@
   <ItemGroup>
     <Content Include="Css\Layout\AdminLTE.css" />
     <Content Include="Css\Layout\bootstrap.min.css" />
+    <Content Include="Css\Layout\Custom.css" />
     <Content Include="Fonts\font-awesome.min.css" />
     <Content Include="Css\Layout\ionicons.min.css" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
@@ -178,7 +179,7 @@
     <Content Include="Fonts\ionicons.ttf" />
     <Content Include="Fonts\ionicons.woff" />
     <Content Include="Views\Server\Monitor.cshtml" />
-    <Content Include="Views\Server\CheckPorts.cshtml" />
+    <Content Include="Views\Server\ShowServers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

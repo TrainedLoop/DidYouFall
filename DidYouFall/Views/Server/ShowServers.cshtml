@@ -1,0 +1,148 @@
+﻿@model IList<DidYouFall.Repository.Server>
+@{
+    int count = 0;
+}
+
+
+
+@section plugins{
+    <script>
+        Number.prototype.padLeft = function (base, chr) {
+            var len = (String(base || 10).length - String(this).length) + 1;
+            return len > 0 ? new Array(len).join(chr || '0') + this : this;
+        }
+
+        $(".port").click(function (event) {
+            var $btn = $(this).find(".btn");
+            var port = $(this).find(".port").val();
+            var server = $(this).find(".server").val();
+            var url = "/server/CheckPort?server=" + server.toString() + "&port=" + port.toString();
+            var $btn = $(this).find(".btn").html("Verificando...");
+            $.getJSON(url, function (data) {
+                $btn.html(port + " " + data.Status)
+                if (data.Status == "Aberta")
+                    $btn.removeClass().addClass('btn badge bg-green');
+                else
+                    $btn.removeClass().addClass('btn badge bg-red');
+            });
+        });
+
+        $(".ip").click(function (event) {
+            var $status = $(this).parent().parent().parent().find(".Status");
+            var $lastCheck = $(this).parent().parent().parent().find(".lastCheck")
+            var host = $(this).parent().parent().parent().find(".Host").val()
+            $status.html("Verificando...")
+            var url = "/server/CheckOneServer?host=" + host;
+            $.getJSON(url, function (data) {
+                if (data.Status.toString() == "Online")
+                    $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
+                else
+                    $status.html(data.Status.toString()).removeClass().addClass('badge bg-red');
+            });
+            now = new Date(Date.now());
+            //formated Date
+            var d = new Date(Date.now())
+            dformat = [d.getDate().padLeft(),
+                       (d.getMonth() + 1).padLeft(),
+                        d.getFullYear()].join('/') +
+                       ' ' +
+                      [d.getHours().padLeft(),
+                        d.getMinutes().padLeft(),
+                        d.getSeconds().padLeft()].join(':');
+
+            $lastCheck.html(dformat);
+        });
+
+    </script>
+}
+
+
+
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    
+}
+
+
+@foreach (var item in Model)
+{
+     if (count == 0)
+        {
+           @Html.Raw("<div class=\"col-lg-12\">")
+        }
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-lg-12">
+                            <h3>
+                                @item.Name
+                            </h3>
+                            <input type="hidden" class="Host" value="@item.Host" />
+                            <label>
+                                IP: @item.Host
+                            </label>
+
+                            <div class="form-group">
+                                <label>Ultima Verificação:</label>
+                                <p class="lastCheck">@item.LastCheck</p>
+                            </div>
+                            <label>Status:</label>
+                            <span class="Status badge bg-light-blue">Não verificado</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-12">
+                            <div class="icon" style="position:relative;float:right;">
+                                <i class="fa fa-desktop"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button class="ip btn bg-light-blue" style="float:right;">
+                                Verificar Status
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="small-box-footer">
+                Portas
+            </div>
+            <div class="inner">
+                <div class="row">
+                    @foreach (var ports in item.Ports)
+                    {
+                        <div class="port col-lg-3">
+                            <button class="btn badge bg-light-blue">@ports Verificar</button>
+                            <input type="hidden" class="port" value="@ports" />
+                            <input type="hidden" class="server" value="@item.Id" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="inner">
+                <div class="row">
+                    @using (Html.BeginForm("AddPorts", "Server", FormMethod.Post))
+                    {
+                        <input type="hidden" name="server" value="@item.Id" />
+                        <div class="col-lg-3">
+                            <input type="text" name="port" class="form-control" placeholder="8080" />
+                        </div>
+                        <div class="col-lg-9">
+                            <input type="submit" class="btn-success btn-sm" value="Add" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    count++;
+    if (count == 3)
+        {
+           @Html.Raw("</div>")
+            count = 0;
+        }
+    
+}

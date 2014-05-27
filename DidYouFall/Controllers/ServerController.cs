@@ -50,7 +50,7 @@ namespace DidYouFall.Controllers
             }
         }
 
-        public ActionResult CheckPorts()
+        public ActionResult ShowServers()
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
@@ -72,7 +72,7 @@ namespace DidYouFall.Controllers
             {
                 ViewBag.Error = ex.Message;
             }
-            return View("CheckPorts", loggedUser.Servers);
+            return View("AddPorts", loggedUser.Servers);
         }
 
         public ActionResult Monitor()

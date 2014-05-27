@@ -24,7 +24,7 @@
 
                   setInterval(function () {
                       $timer.html(countdown(now).toString());
-                      if ($timer.html() == "1 ") {
+                      if ($timer.html() == "") {
                           var url = "/server/CheckOneServer?host=" + $host.html().toString();
                           $.getJSON(url, function (data) {
                               if (data.Status.toString() == "Online") {
@@ -42,7 +42,7 @@
                           });
                           now = new Date(Date.now());
                           //formated Date
-                          var d = new Date,
+                          var d = new Date(Date.now())
                        dformat = [d.getDate().padLeft(),
                                   (d.getMonth() + 1).padLeft(),
                                    d.getFullYear()].join('/') +
@@ -64,7 +64,7 @@
 }
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Servidores</h3>
+        <h3 class="box-title">Monitor</h3>
     </div>
     <div class="box-body">
         <table class="table table-bordered">
