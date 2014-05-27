@@ -56,5 +56,11 @@ namespace DidYouFall.Models.Forms.Validations
             if (!IPAddress.TryParse(ip, out address))
                 throw new Exception(ErrorMessages.IPInvalid);
         }
+
+        public void Port(int port)
+        {
+            if (port < 1 || port > 65535)
+                throw new Exception("Porta Invalida");
+        }
     }
 }

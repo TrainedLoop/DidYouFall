@@ -31,5 +31,17 @@ namespace DidYouFall.Models.Utilities.Tests
              var a = ServerUtilities.SendPing("10.0.0.50");
              Assert.AreEqual("Offline", a.Status);
          }
+
+        [TestMethod()]
+        public void ConectToPortTest_GmailOpen()
+        {
+            ServerUtilities.ConectToPort("173.194.118.149", 80);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void ConectToPortTest_GmailClosed()
+        {
+            ServerUtilities.ConectToPort("173.194.118.149", 8080);
+        }
     }
 }

@@ -1,11 +1,37 @@
-﻿@model DidYouFall.Models.Forms.AddPort
+﻿@model IList<DidYouFall.Repository.Server>
 
 
 
-@foreach (var item in Model.Servers)
+
+@section plugins{
+    <script>
+        $(".port").click(function (event) {
+            var $btn = $(this).find(".btn");
+            var port = $(this).find(".port").val();
+            var server = $(this).find(".server").val();
+            var url = "/server/CheckPort?server=" + server.toString() + "&port=" + port.toString();
+            var $btn = $(this).find(".btn").html("Verificando...");
+            $.getJSON(url, function (data) {
+                $btn.html(port + " " + data.Status)
+                if(data.Status=="Aberta")
+                    $btn.removeClass().addClass('btn badge bg-green');
+                else
+                    $btn.removeClass().addClass('btn badge bg-red');
+            });
+        });
+
+
+
+
+
+    </script>}
+
+
+
+
+@foreach (var item in Model)
 {
-
-    <div class="col-lg-4">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="small-box bg-aqua">
             <div class="inner">
                 <div class="row">
@@ -17,20 +43,13 @@
                             IP: @item.Host
                         </p>
                         <p>Ultima Verificação: @item.LastCheck</p>
-
-                        <span class="badge @(item.LastStatus=="Online"? "bg-green":"bg-red")">@(item.LastStatus??"Não Verificado")</span>
-
-
+                        <span class="badge @(item.LastStatus=="Online"? "bg-green":"bg-red")">@(item.LastStatus ?? "Não Verificado")</span>
                     </div>
                     <div class="col-lg-6">
                         <div class="icon" style="position:relative;float:right;">
                             <i class="fa fa-desktop"></i>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-
                 </div>
             </div>
             <div class="small-box-footer">
@@ -38,55 +57,33 @@
             </div>
             <div class="inner">
                 <div class="row">
-                    <div class="col-lg-3">
-                        2555:aksodka
+                    @foreach (var ports in item.Ports)
+                    {
+                    <div class="port col-lg-3">
+                        <button class="btn badge bg-light-blue">@ports Verificar</button>
+                        <input type="hidden" class="port" value="@ports" />
+                        <input type="hidden" class="server" value="@item.Id" />
                     </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
-                    <div class="col-lg-3">
-                        2555:aksodka
-                    </div>
+                    }
                 </div>
             </div>
             <div class="inner">
                 <div class="row">
-
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" placeholder="8080" />
+                    @using (Html.BeginForm("AddPorts", "Server", FormMethod.Post))
+                    {
+                    <input type="hidden" name="server" value="@item.Id" />
+                    <div class="col-lg-3">
+                        <input type="text" name="port" class="form-control" placeholder="8080" />
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-9">
                         <input type="submit" class="btn-success btn-sm" value="Add" />
                     </div>
-
+                    }
                 </div>
             </div>
         </div>
     </div>
+
 
 
 

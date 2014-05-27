@@ -9,20 +9,31 @@ namespace DidYouFall.Models.Forms
 {
     public class AddPort
     {
-        private User LoggedUser { get; set; }
-        public List<Server> Servers { get; set; }
-        public string Erro { get; set; }
-
-        public AddPort(User loggedUser)
-        {
-            LoggedUser = loggedUser;
-            Servers = ServerUtilities.GetAllServers(loggedUser) ?? new List<Server>();
+        private AddPort()
+        {            
         }
 
-        public void Setup(Server server, int port)
+        public AddPort(User loggedUser, int serverId, int port)
         {
-            var selectedServer = Servers.Where(i => i == server).SingleOrDefault();
-            selectedServer.Ports.Add(port);
+            try
+            {
+                var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
+                Validations.Inputs vldInput = new Validations.Inputs();
+                Validations.DataBase vldDb = new Validations.DataBase();
+                vldInput.Port(port);
+                vldDb.ServerOwner(loggedUser, serverId);
+                var server = loggedUser.Servers.Where(i => i.Id == serverId).FirstOrDefault();
+                if(!server.Ports.Contains(port))
+                    server.Ports.Add(port);
+                session.Save(server);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
+
+       
     }
 }

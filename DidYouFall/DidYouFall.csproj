@@ -178,7 +178,7 @@
     <Content Include="Fonts\ionicons.ttf" />
     <Content Include="Fonts\ionicons.woff" />
     <Content Include="Views\Server\Monitor.cshtml" />
-    <Content Include="Views\Server\AddPort.cshtml" />
+    <Content Include="Views\Server\CheckPorts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

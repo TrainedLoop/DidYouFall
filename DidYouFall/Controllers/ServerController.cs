@@ -50,12 +50,29 @@ namespace DidYouFall.Controllers
             }
         }
 
-        public ActionResult AddPort()
+        public ActionResult CheckPorts()
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
                 return Redirect("~/User/Login");
-            return View(new AddPort(loggedUser));
+            return View(loggedUser.Servers);
+        }
+
+        [HttpPost]
+        public ActionResult AddPorts(int server, int port)
+        {
+            var loggedUser = UsersUtilities.GetLoggedUser();
+            if (loggedUser == null)
+                return Redirect("~/User/Login");
+            try
+            {
+                new AddPort(loggedUser, server, port);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return View("CheckPorts", loggedUser.Servers);
         }
 
         public ActionResult Monitor()
@@ -67,16 +84,29 @@ namespace DidYouFall.Controllers
 
             return View(ServerUtilities.GetAllServers(loggedUser));
         }
-
-
-
         public ActionResult CheckOneServer(string host)
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
                 return Redirect("~/User/Login");
-            return Json(ServerUtilities.CheckServer(loggedUser,host), JsonRequestBehavior.AllowGet);
+            return Json(ServerUtilities.CheckServer(loggedUser, host), JsonRequestBehavior.AllowGet);
         }
-       
+
+        public ActionResult CheckPort(int port, int server)
+        {
+            try
+            {
+                var loggedUser = UsersUtilities.GetLoggedUser();
+                if (loggedUser == null)
+                    return Redirect("~/User/Login");
+                ServerUtilities.CheckPort(loggedUser, loggedUser.Servers.Where(i => i.Id == server).FirstOrDefault(), port);
+                return Json(new {Port=port, Status = "Aberta" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Port = port, Status = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
     }
 }

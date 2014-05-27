@@ -31,5 +31,11 @@ namespace DidYouFall.Models.Forms.Validations
                     throw new Exception("Host já registrado");
             }
         }
+        public  void ServerOwner(User loggedUser, int serverId)
+        {
+            var server = loggedUser.Servers.Where(i => i.Id == serverId).FirstOrDefault();
+            if (server == null)
+                throw new Exception("Host não cadastrado");
+        }
     }
 }

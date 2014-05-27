@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace DidYouFall.Models.Utilities
 {
@@ -16,7 +17,6 @@ namespace DidYouFall.Models.Utilities
             servers.AddRange(section.QueryOver<Server>().Where(i => i.User == LoggedUser).List());
             return servers;
         }
-
         public static PingReply CheckServer(User LoggedUser, string host)
         {
             var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
@@ -29,7 +29,6 @@ namespace DidYouFall.Models.Utilities
             session.SaveOrUpdate(server);
             return ping;
         }
-
         public static PingReply SendPing(string host)
         {
             Ping ping = new Ping();
@@ -42,6 +41,32 @@ namespace DidYouFall.Models.Utilities
                 Latency = reply.RoundtripTime,
                 Status = reply.Status == IPStatus.Success ? "Online" : reply.Status == IPStatus.TimedOut ? "Offline" : reply.Status.ToString()
             };
+        }
+
+        public static void CheckPort(User LoggedUser, Server server, int port)
+        {
+            try
+            {
+                ConectToPort(server.Host, port);
+            }
+            catch (Exception)
+            {
+                throw;
+            } 
+        }
+
+        public static void ConectToPort(string ip, int port)
+        {
+            try
+            {
+                TcpClient tcpClient = new TcpClient();
+                tcpClient.Connect(ip, port);
+            }
+            catch (Exception)
+            {                
+                throw new Exception("Falha");
+            }
+            
         }
 
 
