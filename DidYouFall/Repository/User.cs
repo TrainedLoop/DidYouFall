@@ -13,7 +13,6 @@ namespace DidYouFall.Repository
         public virtual string Password { get; set; }
         public virtual string Name { get; set; }
         public virtual string Company { get; set; }
-
         public virtual IList<Server> Servers { get; set; }
 
 

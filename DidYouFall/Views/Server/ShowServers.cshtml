@@ -35,9 +35,9 @@
             var url = "/server/CheckOneServer?host=" + host;
             $.getJSON(url, function (data) {
                 if (data.Status.toString() == "Online")
-                    $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
+                    $status.html(data.Status.toString()).removeClass().addClass('Status badge bg-green');
                 else
-                    $status.html(data.Status.toString()).removeClass().addClass('badge bg-red');
+                    $status.html(data.Status.toString()).removeClass().addClass('Status badge bg-red');
             });
             now = new Date(Date.now());
             //formated Date
@@ -61,16 +61,16 @@
 
 @for (int i = 0; i < Model.Count(); i++)
 {
-    
+
 }
 
 
 @foreach (var item in Model)
 {
-     if (count == 0)
-        {
-           @Html.Raw("<div class=\"col-lg-12\">")
-        }
+    if (count == 0)
+    {
+        @Html.Raw("<div class=\"col-lg-12\">")
+    }
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="small-box bg-aqua">
             <div class="inner">
@@ -112,14 +112,17 @@
             </div>
             <div class="inner">
                 <div class="row">
-                    @foreach (var ports in item.Ports)
-                    {
-                        <div class="port col-lg-3">
-                            <button class="btn badge bg-light-blue">@ports Verificar</button>
-                            <input type="hidden" class="port" value="@ports" />
-                            <input type="hidden" class="server" value="@item.Id" />
-                        </div>
-                    }
+                    <div class="col-lg-12">
+                        @foreach (var ports in item.Ports)
+                        {
+                            <div class="port col-lg-3" style="margin-top:5px;">
+                                <button class="btn badge bg-light-blue">@ports Verificar</button>
+                                <input type="hidden" class="port" value="@ports" />
+                                <input type="hidden" class="server" value="@item.Id" />
+
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="inner">
@@ -138,11 +141,11 @@
             </div>
         </div>
     </div>
-    count++;
-    if (count == 3)
-        {
-           @Html.Raw("</div>")
-            count = 0;
-        }
-    
+                    count++;
+                    if (count == 3)
+                    {
+                        @Html.Raw("</div>")
+                        count = 0;
+                    }
+
 }

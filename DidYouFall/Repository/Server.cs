@@ -12,10 +12,12 @@ namespace DidYouFall.Repository
         public virtual string Host { get; set; }
         public virtual Times CheckTime { get; set; }
         public virtual DateTime LastCheck { get; set; }
+        public virtual double Uptime { get; set; }
         public virtual string Contactemail { get; set; }
         public virtual string LastStatus { get; set; }
         public virtual IList<int> Ports { get; set; }
         public virtual User User { get; set; }
+        public virtual IList<ServerLog> Logs { get; set; }
     }
     public enum Times
     {

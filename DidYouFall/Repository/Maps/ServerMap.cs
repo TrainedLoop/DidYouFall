@@ -18,9 +18,13 @@ namespace DidYouFall.Repository.Maps
             Map(x => x.Host).Column("Host");
             Map(x => x.LastCheck).Column("LastCheck");
             Map(x => x.CheckTime).Column("CheckTime").CustomType<int>();
+            Map(x => x.Uptime).Column("Uptime");
             Map(x => x.Contactemail).Column("ContactEmail");
             Map(x => x.LastStatus).Column("LastStatus");
             HasMany(x => x.Ports).Element("Ports").AsBag();
+            HasMany(x => x.Logs)
+                .AsBag()
+                .Cascade.All();
         }
     }
 }

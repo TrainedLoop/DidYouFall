@@ -16,6 +16,7 @@
                   var $status = $(this).find(".Status").children();
                   var $latency = $(this).find(".Latency").children();
                   var $response = $(this).find(".Response").children();
+                  var $uptime = $(this).find(".Uptime").children();
                   var plusminutes = parseInt($timer.html());
                   var now = new Date(Date.now());
                   now = now.setMinutes(now.getMinutes() + plusminutes);
@@ -31,12 +32,16 @@
                                   $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
                                   $latency.html(data.Latency.toString() + " millesec").removeClass();
                                   $response.html(data.HostResponse.toString()).removeClass();
+                                  $uptime.children().attr("style", "width:" + data.Uptime + "%")
+                                  $uptime.children().removeClass().addClass("progress-bar progress-bar-danger")
+
 
                               }
                               else {
                                   $status.html(data.Status.toString()).removeClass().addClass('badge bg-red');
                                   $latency.html("Offline").removeClass().addClass('badge bg-red');
                                   $response.html("Offline").removeClass().addClass('badge bg-red');
+                                  $uptime.children().attr("style", "width:" + data.Uptime + "%")
                               }
 
                           });
@@ -87,9 +92,9 @@
                     <tr>
                         <td>@item.Name</td>
                         <td class="Host">@item.Host</td>
-                        <td>
+                        <td class="Uptime">
                             <div class="progress xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                <div class="progress-bar progress-bar-danger" style="width:@Convert.ToInt32(@item.Uptime)%"></div>
                             </div>
                         </td>
                         <td class="Status">
