@@ -154,12 +154,12 @@ namespace DidYouFall.Models.Utilities
             }
             foreach (var item in downlogs)
             {
-                downtime = uptime + (item.UpAt - item.DownAt);
+                downtime = downtime + (item.UpAt - item.DownAt);
             }
             if (actual.UpAt != null)
                 uptime = uptime + (DateTime.Now - actual.LogAt);
             if (actual.DownAt != null)
-                downtime = uptime + (DateTime.Now - actual.LogAt);
+                downtime = downtime + (DateTime.Now - actual.LogAt);
 
             var total = uptime + downtime;
 
