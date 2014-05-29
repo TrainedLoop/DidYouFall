@@ -28,9 +28,9 @@ namespace DidYouFall.Models.Utilities
             var ping = SendPing(host);
             server.LastStatus = ping.Status;
             SetLog(server, ping);
-            server.Uptime = SetTime(server);
+            server.Uptime = SetUptime(server);
             session.SaveOrUpdate(server);
-            ping.Uptime = Convert.ToInt32(server.Uptime);
+            ping.Uptime = server.Uptime;
             return ping;
         }
 
@@ -57,7 +57,6 @@ namespace DidYouFall.Models.Utilities
                 var newlog = new ServerLog
                 {
                     Closed = false,
-                    LogAt = DateTime.Now,
                     Server = server,
                 };
                 if (ping.Status == "Online")
@@ -79,7 +78,6 @@ namespace DidYouFall.Models.Utilities
                         var newLog = new ServerLog
                         {
                             Closed = false,
-                            LogAt = DateTime.Now,
                             Server = server,
                             UpAt = DateTime.Now
                         };
@@ -95,7 +93,6 @@ namespace DidYouFall.Models.Utilities
                         var newLog = new ServerLog
                         {
                             Closed = false,
-                            LogAt = DateTime.Now,
                             Server = server,
                             DownAt = DateTime.Now
                         };
@@ -141,8 +138,9 @@ namespace DidYouFall.Models.Utilities
             public double Uptime { get; set; }
         }
 
-        public static double SetTime(Server server)
+        public static double SetUptime(Server server)
         {
+            double result = double.NaN;
             var uplogs = server.Logs.Where(i => i.Closed == true && i.UpAt < i.DownAt).ToList();
             var downlogs = server.Logs.Where(i => i.Closed == true && i.UpAt > i.DownAt);
             var actual = server.Logs.Where(i => i.Closed == false).FirstOrDefault();
@@ -154,16 +152,22 @@ namespace DidYouFall.Models.Utilities
             }
             foreach (var item in downlogs)
             {
-                downtime = downtime + (item.UpAt - item.DownAt);
+                downtime = uptime + (item.UpAt - item.DownAt);
             }
-            if (actual.UpAt != null)
-                uptime = uptime + (DateTime.Now - actual.LogAt);
-            if (actual.DownAt != null)
-                downtime = downtime + (DateTime.Now - actual.LogAt);
+            do {
+               
+                if (actual.UpAt != null)
+                    uptime = uptime + (DateTime.Now - actual.UpAt);
+                if (actual.DownAt != null)
+                    downtime = uptime + (DateTime.Now - actual.DownAt);
+                var total = uptime + downtime;
+                result = Math.Round(uptime.Value.TotalMinutes / (total.Value.TotalMinutes / 100), 2);
+                
+            }
+            while (result == double.NaN);
+            return result;
 
-            var total = uptime + downtime;
-
-            return uptime.Value.TotalMinutes / (total.Value.TotalMinutes / 100);
+            
 
         }
     }

@@ -1,0 +1,51 @@
+﻿@model DidYouFall.Models.Forms.ServerLogs
+
+@{
+    int selectd = Model.Logs.Count != 0 ? Model.Logs.First().Server.Id : 0;
+}
+
+@using (Html.BeginForm())
+{
+    <select name="Id">
+        @foreach (var item in Model.Servers)
+        {
+            <option value="@item.Id" @(item.Id==selectd?"selected":"") >@item.Name - @item.Host</option>
+        }
+    </select>
+    <input type="submit" />
+}
+
+@if (Model.Logs.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Server
+                </th>
+                <th>
+                    Caiu Em
+                </th>
+                <th>
+                    Subiu Em
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Logs)
+        {
+            <tr>
+                <td>
+                    @item.Server.Name
+                </td>
+                <td>
+                    @item.DownAt
+                </td>
+                <td>
+                    @item.UpAt
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

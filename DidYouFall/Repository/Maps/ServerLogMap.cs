@@ -14,7 +14,6 @@ namespace DidYouFall.Repository.Maps
             LazyLoad();
             Id(x => x.Id).GeneratedBy.Identity().Column("Id");
             References(x => x.Server);
-            Map(x => x.LogAt).Column("LogAt").Nullable();
             Map(x => x.DownAt).Column("DownAt").Nullable();
             Map(x => x.UpAt).Column("UpAt").Nullable();
             Map(x => x.EmailSended).Column("EmailSended");

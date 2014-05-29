@@ -10,7 +10,6 @@ namespace DidYouFall.Repository
         public ServerLog() { }
         public virtual int Id { get; set; }
         public virtual Server Server { get; set; }
-        public virtual DateTime? LogAt { get; set; }
         public virtual DateTime? DownAt { get; set; }
         public virtual DateTime? UpAt { get; set; }
         public virtual bool Closed { get; set; }

@@ -30,10 +30,12 @@
         $(".ip").click(function (event) {
             var $status = $(this).parent().parent().parent().find(".Status");
             var $lastCheck = $(this).parent().parent().parent().find(".lastCheck")
+            var $uptime = $(this).parent().parent().parent().find(".uptime")
             var host = $(this).parent().parent().parent().find(".Host").val()
             $status.html("Verificando...")
             var url = "/server/CheckOneServer?host=" + host;
             $.getJSON(url, function (data) {
+                $uptime.html(data.Uptime+"%")
                 if (data.Status.toString() == "Online")
                     $status.html(data.Status.toString()).removeClass().addClass('Status badge bg-green');
                 else
@@ -51,6 +53,7 @@
                         d.getSeconds().padLeft()].join(':');
 
             $lastCheck.html(dformat);
+            
         });
 
     </script>
@@ -84,6 +87,10 @@
                             <label>
                                 IP: @item.Host
                             </label>
+                            <div class="form-group">
+                                <label>Uptime:</label>
+                                <p class="uptime">@item.Uptime %</p>
+                            </div>
 
                             <div class="form-group">
                                 <label>Ultima Verificação:</label>

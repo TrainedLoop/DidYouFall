@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,7 @@
     <Compile Include="Models\Forms\Login.cs" />
     <Compile Include="Models\Forms\RegisterServer.cs" />
     <Compile Include="Models\Forms\RegisterUser.cs" />
+    <Compile Include="Models\Forms\ServerLogs.cs" />
     <Compile Include="Models\Forms\Validations\DataBase.cs" />
     <Compile Include="Models\Forms\Validations\Inputs.cs" />
     <Compile Include="Models\ProjectConfigs.cs" />
@@ -182,6 +184,7 @@
     <Content Include="Fonts\ionicons.woff" />
     <Content Include="Views\Server\Monitor.cshtml" />
     <Content Include="Views\Server\ShowServers.cshtml" />
+    <Content Include="Views\Reports\ServerLog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

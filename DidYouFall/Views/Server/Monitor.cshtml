@@ -32,7 +32,7 @@
                                   $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
                                   $latency.html(data.Latency.toString() + " millesec").removeClass();
                                   $response.html(data.HostResponse.toString()).removeClass();
-                                  $uptime.children().attr("style", "width:" + data.Uptime + "%")
+                                  $uptime.children().attr("style", "width:" + parseInt(data.Uptime)+ "%")
                                   if(data.Uptime > 70)
                                       $uptime.children().removeClass().addClass("progress-bar progress-bar-success")
                                   else if (data.Uptime > 50 && data.Uptime <= 70)
