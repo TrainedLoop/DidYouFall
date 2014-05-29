@@ -33,7 +33,12 @@
                                   $latency.html(data.Latency.toString() + " millesec").removeClass();
                                   $response.html(data.HostResponse.toString()).removeClass();
                                   $uptime.children().attr("style", "width:" + data.Uptime + "%")
-                                  $uptime.children().removeClass().addClass("progress-bar progress-bar-danger")
+                                  if(data.Uptime > 70)
+                                      $uptime.children().removeClass().addClass("progress-bar progress-bar-success")
+                                  else if (data.Uptime > 50 && data.Uptime <= 70)
+                                      $uptime.children().removeClass().addClass("progress-bar progress-bar-aqua")
+                                  else if (data.Uptime < 50)
+                                      $uptime.children().removeClass().addClass("progress-bar progress-bar-red")
 
 
                               }
@@ -93,22 +98,22 @@
                         <td>@item.Name</td>
                         <td class="Host">@item.Host</td>
                         <td class="Uptime">
-                            <div class="progress xs">
-                                <div class="progress-bar progress-bar-danger" style="width:@Convert.ToInt32(@item.Uptime)%"></div>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-@(item.Uptime>70?"success":(item.Uptime<=70&&item.Uptime>50?"aqua":"red"))" style="width:@Convert.ToInt32(item.Uptime)%"></div>
                             </div>
                         </td>
                         <td class="Status">
-                            <span class="badge bg-gray">
+                            <span class="badge bg-@(item.LastStatus=="Online"?"green":"red")">
                                 @item.LastStatus
                             </span>
                         </td>
                         <td class="Latency">
-                            <span class="badge bg-gray">
+                            <span class="badge bg-primary">
                                 Não Verificado
                             </span>
                         </td>
                         <td class="Response">
-                            <span class="badge bg-gray">
+                            <span class="badge bg-primary">
                                 Não Verificado
                             </span>
                         </td>
