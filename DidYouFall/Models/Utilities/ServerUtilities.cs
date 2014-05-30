@@ -81,6 +81,8 @@ namespace DidYouFall.Models.Utilities
                             Server = server,
                             UpAt = DateTime.Now
                         };
+                        var email = new ToolBox.Email(ToolBox.Email.OnlineEmail(server));
+                        email.sendMail();
                         server.Logs.Add(newLog);
                     }
                 }
@@ -152,14 +154,14 @@ namespace DidYouFall.Models.Utilities
             }
             foreach (var item in downlogs)
             {
-                downtime = uptime + (item.UpAt - item.DownAt);
+                downtime = downtime + (item.UpAt - item.DownAt);
             }
             do {
                
                 if (actual.UpAt != null)
                     uptime = uptime + (DateTime.Now - actual.UpAt);
                 if (actual.DownAt != null)
-                    downtime = uptime + (DateTime.Now - actual.DownAt);
+                    downtime = downtime + (DateTime.Now - actual.DownAt);
                 var total = uptime + downtime;
                 result = Math.Round(uptime.Value.TotalMinutes / (total.Value.TotalMinutes / 100), 2);
                 

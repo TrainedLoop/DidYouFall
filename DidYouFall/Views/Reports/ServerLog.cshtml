@@ -1,51 +1,81 @@
 ﻿@model DidYouFall.Models.Forms.ServerLogs
 
 @{
-    int selectd = Model.Logs.Count != 0 ? Model.Logs.First().Server.Id : 0;
+    int selectd = Model.Logs != null ? Model.Logs.ServerId : -1;
 }
 
-@using (Html.BeginForm())
-{
-    <select name="Id">
-        @foreach (var item in Model.Servers)
-        {
-            <option value="@item.Id" @(item.Id==selectd?"selected":"") >@item.Name - @item.Host</option>
-        }
-    </select>
-    <input type="submit" />
-}
 
-@if (Model.Logs.Count > 0)
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Server
-                </th>
-                <th>
-                    Caiu Em
-                </th>
-                <th>
-                    Subiu Em
-                </th>
-            </tr>
-        </thead>
-        @foreach (var item in Model.Logs)
-        {
-            <tr>
-                <td>
-                    @item.Server.Name
-                </td>
-                <td>
-                    @item.DownAt
-                </td>
-                <td>
-                    @item.UpAt
-                </td>
-            </tr>
-        }
+<div class="col-lg-12">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">
+                Logs
+            </h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <div class="inner">
+                        <div class="col-lg-12">
+                            <label>Buscar Host</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <select class="form-control" name="Id">
+                                @foreach (var item in Model.Servers)
+                                {
+                                    <option value="@item.Id" @(item.Id == selectd ? "selected" : "")>@item.Name - @item.Host</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Buscar" />
+                </div>
+            }
+            @if (Model.Logs != null)
+            {
+                <center>
+                    <h2> Server: @Model.Logs.ServerName - IP: @Model.Logs.ServerIp - Uptime: @Model.Logs.ServerUptime%</h2>
+                </center>
 
-    </table>
-}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Tempo
+                            </th>
+                            <th>
+                                Caiu em:
+                            </th>
+                            <th>
+                                Online em:
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Logs.Status)
+                    {
+                        <tr>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td>
+                                Dias: @item.Time.Value.Days - @item.Time.Value.Hours.ToString("00"):@item.Time.Value.Minutes.ToString("00"):@item.Time.Value.Seconds.ToString("00")
+                            </td>
+                            <td>
+                                @item.DownAt
+                            </td>
+                            <td>
+                                @item.UpAt
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+    </div>
+</div>
 

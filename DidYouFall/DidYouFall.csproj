@@ -160,6 +160,7 @@
     <Compile Include="Repository\User.cs" />
     <Compile Include="Models\Utilities\UsersUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolBox\Email.cs" />
     <Compile Include="ToolBox\Encryption.cs" />
   </ItemGroup>
   <ItemGroup>
