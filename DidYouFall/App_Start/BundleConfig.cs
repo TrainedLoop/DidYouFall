@@ -12,13 +12,13 @@ namespace DidYouFall.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             //LAYOUT
-            bundles.Add(new ScriptBundle("~/bundles/Js/Layout").Include(
+            bundles.Add(new ScriptBundle("~/Js/Layout").Include(
                         "~/JavaScripts/Layout/jquery-1.11.1.min.js",
                         "~/JavaScripts/Layout/bootstrap.min.js",
                         "~/JavaScripts/Layout/app.js"
                         ));
 
-            bundles.Add(new StyleBundle("~/bundles/Css/Layout").Include(
+            bundles.Add(new StyleBundle("~/Css/BaseLayout").Include(
             "~/Css/Layout/bootstrap.min.css",
             "~/Fonts/font-awesome.min.css",
             "~/Css/Layout/ionicons.min.css",            
@@ -28,13 +28,13 @@ namespace DidYouFall.App_Start
             ));
 
             //SERVER REGISTER
-            bundles.Add(new ScriptBundle("~/bundles/Js/Plugins/IpMask").Include(
+            bundles.Add(new ScriptBundle("~/Js/Plugins/IpMask").Include(
             "~/JavaScripts/Plugins/Mask/IpMaskInt.js",
             "~/JavaScripts/Plugins/Mask/mask-plugin.js"
             ));
 
             //SERVER REGISTER
-            bundles.Add(new ScriptBundle("~/bundles/Js/Plugins/Countdown").Include(
+            bundles.Add(new ScriptBundle("~/Js/Plugins/Countdown").Include(
             "~/JavaScripts/Plugins/Countdown/countdown.js",
             "~/JavaScripts/Plugins/Countdown/HostTableInit.js"
             ));
