@@ -31,9 +31,9 @@
             var $status = $(this).parent().parent().parent().find(".Status");
             var $lastCheck = $(this).parent().parent().parent().find(".lastCheck")
             var $uptime = $(this).parent().parent().parent().find(".uptime")
-            var host = $(this).parent().parent().parent().find(".Host").val()
+            var IP = $(this).parent().parent().parent().find(".IP").val()
             $status.html("Verificando...")
-            var url = "/server/CheckOneServer?host=" + host;
+            var url = "/server/CheckOneServer?IP=" + IP;
             $.getJSON(url, function (data) {
                 $uptime.html(data.Uptime+"%")
                 if (data.Status.toString() == "Online")
@@ -83,9 +83,9 @@
                             <h3>
                                 @item.Name
                             </h3>
-                            <input type="hidden" class="Host" value="@item.Host" />
+                            <input type="hidden" class="IP" value="@item.IP" />
                             <label>
-                                IP: @item.Host
+                                IP: @item.IP
                             </label>
                             <div class="form-group">
                                 <label>Uptime:</label>

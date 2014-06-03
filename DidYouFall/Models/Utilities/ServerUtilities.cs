@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace DidYouFall.Models.Utilities
 {
@@ -18,31 +19,32 @@ namespace DidYouFall.Models.Utilities
             return servers;
         }
 
-        public static PingReply CheckServer(User LoggedUser, string host)
+        public static PingReply CheckServer(User LoggedUser, string IP)
         {
             var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
-            Server server = LoggedUser.Servers.Where(i => i.Host == host).SingleOrDefault();
+            Server server = LoggedUser.Servers.Where(i => i.IP == IP).SingleOrDefault();
             if (server == null)
-                throw new Exception("Host não Cadastrado");
+                throw new Exception("IP não Cadastrado");
             server.LastCheck = DateTime.Now;
-            var ping = SendPing(host);
+            var ping = SendPing(IP);
             server.LastStatus = ping.Status;
             SetLog(server, ping);
             server.Uptime = SetUptime(server);
-            session.SaveOrUpdate(server);
             ping.Uptime = server.Uptime;
+            session.SaveOrUpdate(server);
+            session.Flush();
             return ping;
         }
 
-        public static PingReply SendPing(string host)
+        public static PingReply SendPing(string IP)
         {
             Ping ping = new Ping();
 
-            var reply = ping.Send(host, 2000);
+            var reply = ping.Send(IP, 2000);
 
             return new PingReply
             {
-                HostResponse = reply.Address == null ? "" : reply.Address.ToString(),
+                IPResponse = reply.Address == null ? "" : reply.Address.ToString(),
                 Latency = reply.RoundtripTime,
                 Status = reply.Status == IPStatus.Success ? "Online" : reply.Status == IPStatus.TimedOut ? "Offline" : reply.Status.ToString()
             };
@@ -82,7 +84,12 @@ namespace DidYouFall.Models.Utilities
                             UpAt = DateTime.Now
                         };
                         var email = new ToolBox.Email(ToolBox.Email.OnlineEmail(server));
-                        email.sendMail();
+                        Thread Temail = new Thread(delegate()
+                        {
+                            email.sendMail();
+                        });
+                        Temail.IsBackground = true;
+                        Temail.Start();
                         server.Logs.Add(newLog);
                     }
                 }
@@ -98,6 +105,13 @@ namespace DidYouFall.Models.Utilities
                             Server = server,
                             DownAt = DateTime.Now
                         };
+                        var email = new ToolBox.Email(ToolBox.Email.OfflineEmail(server));
+                        Thread Temail = new Thread(delegate()
+                        {
+                            email.sendMail();
+                        });
+                        Temail.IsBackground = true;
+                        Temail.Start();
                         server.Logs.Add(newLog);
                     }
                 }
@@ -110,7 +124,7 @@ namespace DidYouFall.Models.Utilities
         {
             try
             {
-                ConectToPort(server.Host, port);
+                ConectToPort(server.IP, port);
             }
             catch (Exception)
             {
@@ -134,7 +148,7 @@ namespace DidYouFall.Models.Utilities
 
         public class PingReply
         {
-            public string HostResponse { get; set; }
+            public string IPResponse { get; set; }
             public long Latency { get; set; }
             public string Status { get; set; }
             public double Uptime { get; set; }
@@ -156,20 +170,20 @@ namespace DidYouFall.Models.Utilities
             {
                 downtime = downtime + (item.UpAt - item.DownAt);
             }
-            do {
-               
+
+            do
+            {
                 if (actual.UpAt != null)
                     uptime = uptime + (DateTime.Now - actual.UpAt);
                 if (actual.DownAt != null)
                     downtime = downtime + (DateTime.Now - actual.DownAt);
                 var total = uptime + downtime;
                 result = Math.Round(uptime.Value.TotalMinutes / (total.Value.TotalMinutes / 100), 2);
-                
-            }
-            while (result == double.NaN);
+            } while (double.IsNaN(result));
+
             return result;
 
-            
+
 
         }
     }

@@ -42,7 +42,7 @@ namespace DidYouFall.Models.Forms
                 {
                     ServerId = log.FirstOrDefault().Server.Id;
                     ServerName = log.FirstOrDefault().Server.Name;
-                    ServerIp = log.FirstOrDefault().Server.Host;
+                    ServerIp = log.FirstOrDefault().Server.IP;
                     ServerUptime = log.FirstOrDefault().Server.Uptime;
                     foreach (var item in log)
                     {

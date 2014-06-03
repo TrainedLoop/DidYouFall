@@ -15,7 +15,7 @@ namespace DidYouFall.Repository.Maps
             Id(x => x.Id).GeneratedBy.Identity().Column("Id");
             References(x => x.User);
             Map(x => x.Name).Column("Name");
-            Map(x => x.Host).Column("Host");
+            Map(x => x.IP).Column("IP");
             Map(x => x.LastCheck).Column("LastCheck");
             Map(x => x.CheckTime).Column("CheckTime").CustomType<int>();
             Map(x => x.Uptime).Column("Uptime");

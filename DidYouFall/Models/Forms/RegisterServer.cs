@@ -17,16 +17,16 @@ namespace DidYouFall.Models.Forms
             Success = false;
         }
 
-        public void Setup(string name, string host, string contactemail, Times verificationtime, User loggedUser)
+        public void Setup(string name, string IP, string contactemail, Times verificationtime, User loggedUser)
         {
             try
             {
                 Validations.Inputs vldInpt = new Validations.Inputs();
                 Validations.DataBase vldDb = new Validations.DataBase();
-                vldInpt.IPString(host);
+                vldInpt.IPString(IP);
                 vldInpt.EmailString(contactemail);
-                vldDb.RegisteredHostOnUser(host, loggedUser);
-                Server = new Server { Name = name, Host = host, CheckTime = verificationtime, Contactemail = contactemail, User = loggedUser };
+                vldDb.RegisteredIPOnUser(IP, loggedUser);
+                Server = new Server { Name = name, IP = IP, CheckTime = verificationtime, Contactemail = contactemail, User = loggedUser };
 
             }
             catch (Exception ex)

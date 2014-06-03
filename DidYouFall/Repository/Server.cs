@@ -9,7 +9,7 @@ namespace DidYouFall.Repository
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
-        public virtual string Host { get; set; }
+        public virtual string IP { get; set; }
         public virtual Times CheckTime { get; set; }
         public virtual DateTime LastCheck { get; set; }
         public virtual double Uptime { get; set; }

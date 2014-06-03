@@ -20,22 +20,22 @@ namespace DidYouFall.Models.Forms.Validations
             }
         }
 
-        public void RegisteredHostOnUser(string host, User loggedUser)
+        public void RegisteredIPOnUser(string IP, User loggedUser)
         {
 
 
             var session = DidYouFall.MvcApplication.SessionFactory.GetCurrentSession();
             {
-                Server server = session.QueryOver<Server>().Where(i => i.Host == host && i.User == loggedUser).SingleOrDefault();
+                Server server = session.QueryOver<Server>().Where(i => i.IP == IP && i.User == loggedUser).SingleOrDefault();
                 if (server != null)
-                    throw new Exception("Host já registrado");
+                    throw new Exception("IP já registrado");
             }
         }
         public  void ServerOwner(User loggedUser, int serverId)
         {
             var server = loggedUser.Servers.Where(i => i.Id == serverId).FirstOrDefault();
             if (server == null)
-                throw new Exception("Host não cadastrado");
+                throw new Exception("IP não cadastrado");
         }
     }
 }

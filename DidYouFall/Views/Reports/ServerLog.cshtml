@@ -24,7 +24,7 @@
                             <select class="form-control" name="Id">
                                 @foreach (var item in Model.Servers)
                                 {
-                                    <option value="@item.Id" @(item.Id == selectd ? "selected" : "")>@item.Name - @item.Host</option>
+                                    <option value="@item.Id" @(item.Id == selectd ? "selected" : "")>@item.Name - @item.IP</option>
                                 }
                             </select>
                         </div>

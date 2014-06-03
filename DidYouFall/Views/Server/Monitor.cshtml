@@ -10,7 +10,7 @@
 
         $("#Hosts > tr").each(
               function (i, el) {
-                  var $host = $(this).find(".Host");
+                  var $IP = $(this).find(".IP");
                   var $lastCheck = $(this).find(".LastCheck");
                   var $timer = $(this).find(".Timer").children();
                   var $status = $(this).find(".Status").children();
@@ -26,12 +26,12 @@
                   setInterval(function () {
                       $timer.html(countdown(now).toString());
                       if ($timer.html() == "") {
-                          var url = "/server/CheckOneServer?host=" + $host.html().toString();
+                          var url = "/server/CheckOneServer?IP=" + $IP.html().toString();
                           $.getJSON(url, function (data) {
                               if (data.Status.toString() == "Online") {
                                   $status.html(data.Status.toString()).removeClass().addClass('badge bg-green');
                                   $latency.html(data.Latency.toString() + " millesec").removeClass();
-                                  $response.html(data.HostResponse.toString()).removeClass();
+                                  $response.html(data.IPResponse.toString()).removeClass();
                                   $uptime.children().attr("style", "width:" + parseInt(data.Uptime)+ "%")
                                   if(data.Uptime > 70)
                                       $uptime.children().removeClass().addClass("progress-bar progress-bar-success")
@@ -81,7 +81,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Host</th>
+                    <th>IP</th>
                     <th>UpTime</th>
                     <th style="width: 80px">Status</th>
                     <th style="width: 80px">Latencia</th>
@@ -96,7 +96,7 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td class="Host">@item.Host</td>
+                        <td class="IP">@item.IP</td>
                         <td class="Uptime">
                             <div class="progress xs progress-striped active">
                                 <div class="progress-bar progress-bar-@(item.Uptime>70?"success":(item.Uptime<=70&&item.Uptime>50?"aqua":"red"))" style="width:@Convert.ToInt32(item.Uptime)%"></div>

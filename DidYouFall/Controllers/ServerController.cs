@@ -23,7 +23,7 @@ namespace DidYouFall.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> Register(string name, string host, string contactEmail, Times verificationTime)
+        public async Task<ActionResult> Register(string name, string ip, string contactEmail, Times verificationTime)
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
@@ -32,7 +32,7 @@ namespace DidYouFall.Controllers
             RegisterServer ServerToRegister = new RegisterServer();
             try
             {
-                ServerToRegister.Setup(name, host, contactEmail, verificationTime, loggedUser);
+                ServerToRegister.Setup(name, ip, contactEmail, verificationTime, loggedUser);
                 RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
                 if (String.IsNullOrEmpty(recaptchaHelper.Response))
                     throw new CustomException.EmptyRecaptcha();
@@ -55,6 +55,8 @@ namespace DidYouFall.Controllers
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
                 return Redirect("~/User/Login");
+            if (loggedUser.Servers.Count == 0)
+                return RedirectToAction("Register");
             return View(loggedUser.Servers);
         }
 
@@ -72,7 +74,7 @@ namespace DidYouFall.Controllers
             {
                 ViewBag.Error = ex.Message;
             }
-            return View("AddPorts", loggedUser.Servers);
+            return View("ShowServers", loggedUser.Servers);
         }
 
         public ActionResult Monitor()
@@ -80,16 +82,19 @@ namespace DidYouFall.Controllers
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
                 return Redirect("~/User/Login");
+            if (loggedUser.Servers.Count == 0)
+                return RedirectToAction("Register");
+
 
 
             return View(ServerUtilities.GetAllServers(loggedUser));
         }
-        public ActionResult CheckOneServer(string host)
+        public ActionResult CheckOneServer(string IP)
         {
             var loggedUser = UsersUtilities.GetLoggedUser();
             if (loggedUser == null)
                 return Redirect("~/User/Login");
-            return Json(ServerUtilities.CheckServer(loggedUser, host), JsonRequestBehavior.AllowGet);
+            return Json(ServerUtilities.CheckServer(loggedUser, IP), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CheckPort(int port, int server)
