@@ -186,6 +186,7 @@
     <Content Include="Views\Server\Monitor.cshtml" />
     <Content Include="Views\Server\ShowServers.cshtml" />
     <Content Include="Views\Reports\ServerLog.cshtml" />
+    <None Include="Properties\PublishProfiles\taon.danielporto.net - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

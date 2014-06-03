@@ -213,3 +213,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+DidYouFall/ToolBox/Email.cs
+DidYouFall/Web.config
+DidYouFall/Global.asax.cs
