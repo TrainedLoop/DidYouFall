@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidYouFall", "DidYouFall\DidYouFall.csproj", "{5C16E007-1B45-4712-93B8-6971D3632A0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidYouFallTests", "DidYouFallTests\DidYouFallTests.csproj", "{DD037566-241D-4DD9-AD08-86C7586AEF4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidYouFall.Agent", "DidYouFall.Agent\DidYouFall.Agent.csproj", "{8E477762-E3F7-4D65-9779-1B83016DD3A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DD037566-241D-4DD9-AD08-86C7586AEF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD037566-241D-4DD9-AD08-86C7586AEF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD037566-241D-4DD9-AD08-86C7586AEF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E477762-E3F7-4D65-9779-1B83016DD3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E477762-E3F7-4D65-9779-1B83016DD3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E477762-E3F7-4D65-9779-1B83016DD3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E477762-E3F7-4D65-9779-1B83016DD3A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
