@@ -12,9 +12,9 @@ namespace DidYouFall.Agent.Forms
 {
     public partial class About : Form
     {
-#warning config
         string LinkToAutor = "http://www.danielporto.net";
         string LinkToApp = "http://taon.danielporto.net";
+
         public About()
         {
             InitializeComponent();

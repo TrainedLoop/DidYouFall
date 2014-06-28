@@ -21,7 +21,7 @@ namespace DidYouFall.Agent.TrayIcon
         {		
             //notifyIcon.MouseClick += new MouseEventHandler(ni_MouseClick);
             notifyIcon.Icon = Resources.Icon;
-            notifyIcon.Text = "Verificador Did You Fall";
+            notifyIcon.Text = "Agente Did You Fall";
             notifyIcon.Visible = true;
 
             notifyIcon.ContextMenuStrip = new Menu().Create();

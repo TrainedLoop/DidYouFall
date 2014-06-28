@@ -9,10 +9,6 @@ namespace DidYouFall.Agent
 {
     static class Program
     {
-        public static string Version = "0.1";
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -22,8 +18,6 @@ namespace DidYouFall.Agent
             using (AgentIcon agentIcon = new AgentIcon())
             {
                 agentIcon.Display();
-
-                // Make sure the application runs!
                 Application.Run();
             }
         }

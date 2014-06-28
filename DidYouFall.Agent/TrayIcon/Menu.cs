@@ -11,6 +11,7 @@ namespace DidYouFall.Agent.TrayIcon
     class Menu
     {
         bool isAboutLoaded = false;
+        bool isStatusLoaded = false;
 
         public ContextMenuStrip Create()
         {
@@ -20,7 +21,8 @@ namespace DidYouFall.Agent.TrayIcon
 
             // Verificar
             item = new ToolStripMenuItem();
-            item.Text = "Verificar";
+            item.Text = "Status";
+            item.Click += new EventHandler(Status_Click);
             menu.Items.Add(item);
 
             // Sobre.
@@ -53,9 +55,19 @@ namespace DidYouFall.Agent.TrayIcon
                 isAboutLoaded = false;
             }
         }
+        void Status_Click(object sender, EventArgs e)
+        {
+            if (!isStatusLoaded)
+            {
+                isStatusLoaded = true;
+                new Status(new PCInfo()).ShowDialog();
+                isStatusLoaded = false;
+            }
+        }
         void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
     }
 }
+
