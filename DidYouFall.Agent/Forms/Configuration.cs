@@ -27,5 +27,38 @@ namespace DidYouFall.Agent.Forms
             }
 
         }
+
+        private void buttonClearAllHDs_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            {
+                checkedListBoxHDs.SetItemChecked(i, false);
+            }
+        }
+
+        private void buttonSelectAllHDs_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            {
+                checkedListBoxHDs.SetItemChecked(i, true);
+            }
+        }
+
+        private void buttonClearAllServices_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            {
+                checkedListBoxServices.SetItemChecked(i, false);
+            }
+
+        }
+
+        private void buttonSelectAllServices_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            {
+                checkedListBoxServices.SetItemChecked(i, true);
+            }
+        }
     }
 }

@@ -13,10 +13,15 @@ namespace DidYouFall.Agent.Info
 {
     public class PC
     {
+        public string Server { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+
         public string ComputarName { get; set; }
         public string CpuUsage { get; set; }
         public long PhysicalAvailableMemoryInMiB { get; set; }
         public long GetTotalMemoryInMiB { get; set; }
+
         public List<Driver> Drivers { get; set; }
         public List<Service> Services { get; set; }
 
