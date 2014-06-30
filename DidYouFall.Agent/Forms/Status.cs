@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DidYouFall.Agent.Info;
 
 namespace DidYouFall.Agent.Forms
 {
     public partial class Status : Form
     {
-        public Status(PCInfo pcInfo)
+        public Status(PC pcInfo)
         {
             InitializeComponent();
             LblCPU.Text = pcInfo.CpuUsage;
@@ -27,7 +28,7 @@ namespace DidYouFall.Agent.Forms
 
             foreach (var item in pcInfo.Drivers)
             {
-                string[] row = new string[] { item.Volume,item.Label, item.TotalSpace.ToString(), item.FreeSpace.ToString(),item.Format};
+                string[] row = new string[] { item.Volume, item.Label, item.TotalSpace.ToString(), item.FreeSpace.ToString(), item.Format };
                 DgvHD.Rows.Add(row);
             }
         }

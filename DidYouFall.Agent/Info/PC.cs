@@ -7,43 +7,52 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceProcess;
 
-namespace DidYouFall.Agent
+namespace DidYouFall.Agent.Info
 {
-    public class PCInfo
+    public class PC
     {
         public string ComputarName { get; set; }
-        public List<Driver> Drivers { get; set; }
         public string CpuUsage { get; set; }
         public long PhysicalAvailableMemoryInMiB { get; set; }
         public long GetTotalMemoryInMiB { get; set; }
+        public List<Driver> Drivers { get; set; }
+        public List<Service> Services { get; set; }
 
-        public PCInfo()
+        public PC()
         {
             ComputarName = SystemInformation.ComputerName;
             Drivers = new List<Driver>();
+            Services = new List<Service>();
             PerformanceCounter CPU = new PerformanceCounter();
             PhysicalAvailableMemoryInMiB = PerformanceInfo.GetPhysicalAvailableMemoryInMiB();
             GetTotalMemoryInMiB = PerformanceInfo.GetTotalMemoryInMiB();
             CpuUsage = GetCPUUsage(CPU);
-
-
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
                 if (drive.IsReady)
                 {
                     Drivers.Add(new Driver
                     {
-                        FreeSpace = (drive.TotalFreeSpace / 1024)/1024,
+                        FreeSpace = (drive.TotalFreeSpace / 1024) / 1024,
                         Label = drive.VolumeLabel,
-                        TotalSpace = (drive.TotalSize / 1024)/1024,
+                        TotalSpace = (drive.TotalSize / 1024) / 1024,
                         Volume = drive.Name,
                         Status = drive.IsReady,
-                        Format = drive.DriveFormat
+                        Format = drive.DriveFormat,
+                        Monitoring = false
                     });
                 }
             }
+            foreach (var item in ServiceController.GetServices().OrderBy(i=> i.ServiceName))
+            {
+                Services.Add(new Service { Name = item.DisplayName, Status = item.Status.ToString(), Monitoring = false });
+            }
+            Services = Services.OrderBy(i => i.Name).ToList();
         }
+
+
         public static string GetCPUUsage(PerformanceCounter CPU)
         {
             CPU.CategoryName = "Processor";
@@ -59,6 +68,13 @@ namespace DidYouFall.Agent
             public string Volume { get; set; }
             public bool Status { get; set; }
             public string Format { get; set; }
+            public bool Monitoring { get; set; }
+        }
+        public class Service
+        {
+            public string Name { get; set; }
+            public string Status { get; set; }
+            public bool Monitoring { get; set; }
         }
         public static class PerformanceInfo
         {
@@ -113,6 +129,6 @@ namespace DidYouFall.Agent
 
             }
         }
-    }
 
+    }
 }
