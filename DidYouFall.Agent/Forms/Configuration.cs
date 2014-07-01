@@ -8,14 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DidYouFall.Agent.Info;
+using DidYouFall.Agent.Controllers;
 
 namespace DidYouFall.Agent.Forms
 {
     public partial class Configuration : Form
     {
+        public PC PcInfo { get; set; }
+        ConfigurationController config = new ConfigurationController();
         public Configuration(PC pcInfo)
         {
             InitializeComponent();
+            PcInfo = pcInfo;
 
             foreach (var item in pcInfo.Drivers)
             {
@@ -60,5 +64,38 @@ namespace DidYouFall.Agent.Forms
                 checkedListBoxServices.SetItemChecked(i, true);
             }
         }
+
+        private void BtnApply_Click(object sender, EventArgs e)
+        {
+            config.ApplyConfig(
+                PcInfo,
+                textBoxServer,
+                textBoxEmail,
+                textBoxPassword,
+                checkedListBoxHDs,
+                checkedListBoxServices
+                );
+
+        }
+
+        private void BtnOK_Click(object sender, EventArgs e)
+        {
+            config.ApplyConfig(
+                PcInfo,
+                textBoxServer,
+                textBoxEmail,
+                textBoxPassword,
+                checkedListBoxHDs,
+                checkedListBoxServices
+                );
+
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            var a = FileController.LoadConfig();
+        }
+
+
     }
 }

@@ -8,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ServiceProcess;
+using System.Runtime.Serialization;
 
 namespace DidYouFall.Agent.Info
 {
+    [Serializable()]
     public class PC
     {
         public string Server { get; set; }
@@ -50,13 +52,12 @@ namespace DidYouFall.Agent.Info
                     });
                 }
             }
-            foreach (var item in ServiceController.GetServices().OrderBy(i=> i.ServiceName))
+            foreach (var item in ServiceController.GetServices().OrderBy(i => i.ServiceName))
             {
                 Services.Add(new Service { Name = item.DisplayName, Status = item.Status.ToString(), Monitoring = false });
             }
             Services = Services.OrderBy(i => i.Name).ToList();
         }
-
 
         public static string GetCPUUsage(PerformanceCounter CPU)
         {
@@ -65,22 +66,7 @@ namespace DidYouFall.Agent.Info
             CPU.InstanceName = "_Total";
             return CPU.NextValue() + "%";
         }
-        public class Driver
-        {
-            public string Label { get; set; }
-            public long FreeSpace { get; set; }
-            public long TotalSpace { get; set; }
-            public string Volume { get; set; }
-            public bool Status { get; set; }
-            public string Format { get; set; }
-            public bool Monitoring { get; set; }
-        }
-        public class Service
-        {
-            public string Name { get; set; }
-            public string Status { get; set; }
-            public bool Monitoring { get; set; }
-        }
+
         public static class PerformanceInfo
         {
             [DllImport("psapi.dll", SetLastError = true)]
@@ -135,5 +121,24 @@ namespace DidYouFall.Agent.Info
             }
         }
 
+
+    }
+    [Serializable()]
+    public class Driver
+    {
+        public string Label { get; set; }
+        public long FreeSpace { get; set; }
+        public long TotalSpace { get; set; }
+        public string Volume { get; set; }
+        public bool Status { get; set; }
+        public string Format { get; set; }
+        public bool Monitoring { get; set; }
+    }
+    [Serializable()]
+    public class Service
+    {
+        public string Name { get; set; }
+        public string Status { get; set; }
+        public bool Monitoring { get; set; }
     }
 }
