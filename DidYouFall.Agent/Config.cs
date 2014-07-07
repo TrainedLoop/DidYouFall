@@ -9,5 +9,6 @@ namespace DidYouFall.Agent
     class Config
     {
         public static string Version = "0.1";
+        
     }
 }

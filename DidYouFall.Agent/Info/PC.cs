@@ -18,7 +18,6 @@ namespace DidYouFall.Agent.Info
         public string Server { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
         public string ComputarName { get; set; }
         public string CpuUsage { get; set; }
         public long PhysicalAvailableMemoryInMiB { get; set; }
@@ -56,10 +55,41 @@ namespace DidYouFall.Agent.Info
             {
                 Services.Add(new Service { Name = item.DisplayName, Status = item.Status.ToString(), Monitoring = false });
             }
-            Services = Services.OrderBy(i => i.Name).ToList();
+
+
         }
 
-        public static string GetCPUUsage(PerformanceCounter CPU)
+        private void DriverCheck()
+        {
+            var ActiveDrivers = Drivers.Where(i => i.Monitoring == true).Select(i => i.Volume);
+
+            foreach (var item in DriveInfo.GetDrives().Where(i => i.IsReady == true && ActiveDrivers.Contains(i.Name)))
+            {
+                Drivers.Remove(Drivers.Where(i => i.Volume == item.Name).FirstOrDefault());
+                Drivers.Add(new Driver
+                {
+                    FreeSpace = (item.TotalFreeSpace / 1024) / 1024,
+                    Label = item.VolumeLabel,
+                    TotalSpace = (item.TotalSize / 1024) / 1024,
+                    Volume = item.Name,
+                    Status = item.IsReady,
+                    Format = item.DriveFormat,
+                    Monitoring = true
+                });
+            }
+        }
+
+        private void ServiceCheck()
+        {
+            var ActiveServices = Services.Where(i => i.Monitoring == true).Select(i => i.Name);
+            foreach (var item in ServiceController.GetServices().Where(i => ActiveServices.Contains(i.DisplayName)))
+            {
+                Services.Remove(Services.Where(i => i.Name == item.DisplayName).FirstOrDefault());
+                Services.Add(new Service { Name = item.DisplayName, Monitoring = true, Status = item.Status.ToString() });
+            }
+        }
+
+        private static string GetCPUUsage(PerformanceCounter CPU)
         {
             CPU.CategoryName = "Processor";
             CPU.CounterName = "% Processor Time";
@@ -67,7 +97,7 @@ namespace DidYouFall.Agent.Info
             return CPU.NextValue() + "%";
         }
 
-        public static class PerformanceInfo
+        private static class PerformanceInfo
         {
             [DllImport("psapi.dll", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
@@ -120,7 +150,6 @@ namespace DidYouFall.Agent.Info
 
             }
         }
-
 
     }
     [Serializable()]

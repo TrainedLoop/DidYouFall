@@ -31,7 +31,7 @@ namespace DidYouFall.Agent.Controllers
             {
                 pcInfo.Services.Where(i => i.Name == services.ToString()).FirstOrDefault().Monitoring = true;
             }
-            FileController.SaveConfig(pcInfo);
+            FileController.SaveConfig();
         }
     }
 }

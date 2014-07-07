@@ -21,11 +21,11 @@ namespace DidYouFall.Agent.Forms
             InitializeComponent();
             PcInfo = pcInfo;
 
-            foreach (var item in pcInfo.Drivers)
+            foreach (var item in pcInfo.Drivers.OrderBy(i => i.Volume))
             {
-                checkedListBoxHDs.Items.Add(item.Volume + (string.IsNullOrEmpty(item.Label) ? "" : " - " + item.Label), item.Status);
+                checkedListBoxHDs.Items.Add(item.Volume + (string.IsNullOrEmpty(item.Label) ? "" : " - " + item.Label), item.Monitoring);
             }
-            foreach (var item in pcInfo.Services)
+            foreach (var item in pcInfo.Services.OrderBy( i=> i.Name))
             {
                 checkedListBoxServices.Items.Add(item.Name, item.Monitoring);
             }
@@ -50,7 +50,7 @@ namespace DidYouFall.Agent.Forms
 
         private void buttonClearAllServices_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            for (int i = 0; i < checkedListBoxServices.Items.Count; i++)
             {
                 checkedListBoxServices.SetItemChecked(i, false);
             }
@@ -59,7 +59,7 @@ namespace DidYouFall.Agent.Forms
 
         private void buttonSelectAllServices_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkedListBoxHDs.Items.Count; i++)
+            for (int i = 0; i < checkedListBoxServices.Items.Count; i++)
             {
                 checkedListBoxServices.SetItemChecked(i, true);
             }
@@ -89,11 +89,13 @@ namespace DidYouFall.Agent.Forms
                 checkedListBoxServices
                 );
 
+            this.Dispose();
+
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            var a = FileController.LoadConfig();
+            FileController.LoadConfig();
         }
 
 

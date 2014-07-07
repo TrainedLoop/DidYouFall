@@ -61,7 +61,7 @@ namespace DidYouFall.Agent.TrayIcon
             if (!isConfigLoaded)
             {
                 isConfigLoaded = true;
-                new Forms.Configuration(new PC()).ShowDialog();
+                new Forms.Configuration(Program.PcInfo).ShowDialog();
                 isConfigLoaded = false;
             }
         }
