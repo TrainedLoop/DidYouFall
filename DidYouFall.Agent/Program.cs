@@ -19,7 +19,6 @@ namespace DidYouFall.Agent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FileController.LoadConfig();
-            PcInfo.DriverCheck();
             using (AgentIcon agentIcon = new AgentIcon())
             {
                 agentIcon.Display();

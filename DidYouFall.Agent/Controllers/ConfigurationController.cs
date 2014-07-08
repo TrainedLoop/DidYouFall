@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DidYouFall.Agent.Info;
 using System.Windows.Forms;
+using System.Net;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace DidYouFall.Agent.Controllers
 {
@@ -33,5 +36,28 @@ namespace DidYouFall.Agent.Controllers
             }
             FileController.SaveConfig();
         }
+
+        public string TryConectToServer(string server, string email, string password )
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                var values = new NameValueCollection();
+                values["email"] = email;
+                values["password"] = password;
+                //string post = "email="+PcInfo.Email+"&password="+PcInfo.Password;
+                var response = client.UploadValues("http://" + server + "/agent/AgentConfigConection", "POST", values);
+                var responseString = Encoding.Default.GetString(response);
+                return JsonConvert.DeserializeObject<string>(responseString);
+                
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+           
+        }
     }
+
+
 }

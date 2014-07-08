@@ -35,6 +35,16 @@ namespace DidYouFall.Agent.Info
             PhysicalAvailableMemoryInMiB = PerformanceInfo.GetPhysicalAvailableMemoryInMiB();
             GetTotalMemoryInMiB = PerformanceInfo.GetTotalMemoryInMiB();
             CpuUsage = GetCPUUsage(CPU);
+            LoadDrivers();
+            LoadServices();
+
+
+
+        }
+
+        public void LoadDrivers()
+        {
+            Drivers.Clear();
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
                 if (drive.IsReady)
@@ -51,11 +61,15 @@ namespace DidYouFall.Agent.Info
                     });
                 }
             }
-            foreach (var item in ServiceController.GetServices().OrderBy(i => i.ServiceName))
+
+        }
+        public void LoadServices()
+        {
+            Services.Clear();
+            foreach (var item in ServiceController.GetServices())
             {
                 Services.Add(new Service { Name = item.DisplayName, Status = item.Status.ToString(), Monitoring = false });
             }
-
 
         }
 

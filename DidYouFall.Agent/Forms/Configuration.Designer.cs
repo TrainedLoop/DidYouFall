@@ -30,6 +30,8 @@
         {
             this.tabControlConfig = new System.Windows.Forms.TabControl();
             this.tabPageLogin = new System.Windows.Forms.TabPage();
+            this.LabelConectStatus = new System.Windows.Forms.Label();
+            this.btnConectar = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,11 +39,13 @@
             this.textBoxServer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageHdMonitor = new System.Windows.Forms.TabPage();
+            this.btnReloadHD = new System.Windows.Forms.Button();
             this.buttonClearAllHDs = new System.Windows.Forms.Button();
             this.buttonSelectAllHDs = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.checkedListBoxHDs = new System.Windows.Forms.CheckedListBox();
             this.tabPageServiceMonitor = new System.Windows.Forms.TabPage();
+            this.btnReloadServices = new System.Windows.Forms.Button();
             this.buttonClearAllServices = new System.Windows.Forms.Button();
             this.buttonSelectAllServices = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,6 +72,8 @@
             // 
             // tabPageLogin
             // 
+            this.tabPageLogin.Controls.Add(this.LabelConectStatus);
+            this.tabPageLogin.Controls.Add(this.btnConectar);
             this.tabPageLogin.Controls.Add(this.textBoxPassword);
             this.tabPageLogin.Controls.Add(this.textBoxEmail);
             this.tabPageLogin.Controls.Add(this.label2);
@@ -82,10 +88,32 @@
             this.tabPageLogin.Text = "Login";
             this.tabPageLogin.UseVisualStyleBackColor = true;
             // 
+            // LabelConectStatus
+            // 
+            this.LabelConectStatus.AutoSize = true;
+            this.LabelConectStatus.Location = new System.Drawing.Point(269, 298);
+            this.LabelConectStatus.Name = "LabelConectStatus";
+            this.LabelConectStatus.Size = new System.Drawing.Size(87, 13);
+            this.LabelConectStatus.TabIndex = 10;
+            this.LabelConectStatus.Text = "soijoasidoasndas";
+            this.LabelConectStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelConectStatus.Visible = false;
+            // 
+            // btnConectar
+            // 
+            this.btnConectar.Location = new System.Drawing.Point(280, 327);
+            this.btnConectar.Name = "btnConectar";
+            this.btnConectar.Size = new System.Drawing.Size(75, 23);
+            this.btnConectar.TabIndex = 9;
+            this.btnConectar.Text = "Conectar";
+            this.btnConectar.UseVisualStyleBackColor = true;
+            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
+            // 
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(81, 171);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '●';
             this.textBoxPassword.Size = new System.Drawing.Size(275, 20);
             this.textBoxPassword.TabIndex = 8;
             // 
@@ -135,6 +163,7 @@
             // 
             // tabPageHdMonitor
             // 
+            this.tabPageHdMonitor.Controls.Add(this.btnReloadHD);
             this.tabPageHdMonitor.Controls.Add(this.buttonClearAllHDs);
             this.tabPageHdMonitor.Controls.Add(this.buttonSelectAllHDs);
             this.tabPageHdMonitor.Controls.Add(this.label3);
@@ -146,6 +175,16 @@
             this.tabPageHdMonitor.TabIndex = 1;
             this.tabPageHdMonitor.Text = "HDs Monitor";
             this.tabPageHdMonitor.UseVisualStyleBackColor = true;
+            // 
+            // btnReloadHD
+            // 
+            this.btnReloadHD.Location = new System.Drawing.Point(20, 299);
+            this.btnReloadHD.Name = "btnReloadHD";
+            this.btnReloadHD.Size = new System.Drawing.Size(75, 23);
+            this.btnReloadHD.TabIndex = 9;
+            this.btnReloadHD.Text = "Recarregar";
+            this.btnReloadHD.UseVisualStyleBackColor = true;
+            this.btnReloadHD.Click += new System.EventHandler(this.btnReloadHD_Click);
             // 
             // buttonClearAllHDs
             // 
@@ -188,6 +227,7 @@
             // tabPageServiceMonitor
             // 
             this.tabPageServiceMonitor.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageServiceMonitor.Controls.Add(this.btnReloadServices);
             this.tabPageServiceMonitor.Controls.Add(this.buttonClearAllServices);
             this.tabPageServiceMonitor.Controls.Add(this.buttonSelectAllServices);
             this.tabPageServiceMonitor.Controls.Add(this.label5);
@@ -198,6 +238,16 @@
             this.tabPageServiceMonitor.Size = new System.Drawing.Size(361, 356);
             this.tabPageServiceMonitor.TabIndex = 2;
             this.tabPageServiceMonitor.Text = "Services Monitor";
+            // 
+            // btnReloadServices
+            // 
+            this.btnReloadServices.Location = new System.Drawing.Point(20, 299);
+            this.btnReloadServices.Name = "btnReloadServices";
+            this.btnReloadServices.Size = new System.Drawing.Size(75, 23);
+            this.btnReloadServices.TabIndex = 7;
+            this.btnReloadServices.Text = "Recarregar";
+            this.btnReloadServices.UseVisualStyleBackColor = true;
+            this.btnReloadServices.Click += new System.EventHandler(this.btnReloadServices_Click);
             // 
             // buttonClearAllServices
             // 
@@ -316,6 +366,10 @@
         private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnApply;
+        private System.Windows.Forms.Button btnReloadHD;
+        private System.Windows.Forms.Button btnReloadServices;
+        private System.Windows.Forms.Button btnConectar;
+        private System.Windows.Forms.Label LabelConectStatus;
 
     }
 }

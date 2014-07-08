@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DidYouFall.Agent.Info;
 using DidYouFall.Agent.Controllers;
+using System.Net;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace DidYouFall.Agent.Forms
 {
@@ -18,18 +21,43 @@ namespace DidYouFall.Agent.Forms
         ConfigurationController config = new ConfigurationController();
         public Configuration(PC pcInfo)
         {
-            InitializeComponent();
             PcInfo = pcInfo;
+            InitializeComponent();
+            InitServerConfig(pcInfo);
+            InitCheckListHDs(PcInfo);
+            InitChrckListServices(PcInfo);
 
+        }
+
+        private void InitServerConfig(PC pcInfo)
+        {
+            textBoxServer.Text = PcInfo.Server;
+            textBoxEmail.Text = PcInfo.Email;
+            textBoxPassword.Text = PcInfo.Password;
+            if (String.IsNullOrWhiteSpace(pcInfo.Server))
+                textBoxServer.Text = "taon.danielporto.net";
+            if (String.IsNullOrWhiteSpace(pcInfo.Email))
+                textBoxEmail.Text = "seuemail@dominio.com";
+            if (String.IsNullOrWhiteSpace(pcInfo.Password))
+                textBoxPassword.Text = "123456";
+        }
+
+        private void InitChrckListServices(PC pcInfo)
+        {
+            checkedListBoxServices.Items.Clear();
+            foreach (var item in pcInfo.Services.OrderBy(i => i.Name))
+            {
+                checkedListBoxServices.Items.Add(item.Name, item.Monitoring);
+            }
+        }
+
+        private void InitCheckListHDs(PC pcInfo)
+        {
+            checkedListBoxHDs.Items.Clear();
             foreach (var item in pcInfo.Drivers.OrderBy(i => i.Volume))
             {
                 checkedListBoxHDs.Items.Add(item.Volume + (string.IsNullOrEmpty(item.Label) ? "" : " - " + item.Label), item.Monitoring);
             }
-            foreach (var item in pcInfo.Services.OrderBy( i=> i.Name))
-            {
-                checkedListBoxServices.Items.Add(item.Name, item.Monitoring);
-            }
-
         }
 
         private void buttonClearAllHDs_Click(object sender, EventArgs e)
@@ -97,6 +125,45 @@ namespace DidYouFall.Agent.Forms
         {
             FileController.LoadConfig();
         }
+
+        private void btnReloadHD_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("As configurações atuais de monitoramento serão perdidas deseja continuar?", "Perigo!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (result == DialogResult.Yes)
+            {
+                PcInfo.LoadDrivers();
+                InitCheckListHDs(PcInfo);
+            }
+
+        }
+
+        private void btnReloadServices_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("As configurações atuais de monitoramento serão perdidas deseja continuar?", "Perigo!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (result == DialogResult.Yes)
+            {
+                PcInfo.LoadServices();
+                InitChrckListServices(PcInfo);
+            }
+        }
+
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            btnConectar.Enabled = false;
+            var response = config.TryConectToServer(textBoxServer.Text, textBoxEmail.Text, textBoxPassword.Text);
+
+            if (response == "True")
+            {
+                MessageBox.Show("Conectado!", "Status de Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(response, "Status de  Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            btnConectar.Enabled = true;
+        }
+
+
 
 
     }
