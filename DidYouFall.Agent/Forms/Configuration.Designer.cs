@@ -30,7 +30,6 @@
         {
             this.tabControlConfig = new System.Windows.Forms.TabControl();
             this.tabPageLogin = new System.Windows.Forms.TabPage();
-            this.LabelConectStatus = new System.Windows.Forms.Label();
             this.btnConectar = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
@@ -53,6 +52,8 @@
             this.BtnOK = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnApply = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmboTime = new System.Windows.Forms.ComboBox();
             this.tabControlConfig.SuspendLayout();
             this.tabPageLogin.SuspendLayout();
             this.tabPageHdMonitor.SuspendLayout();
@@ -72,7 +73,8 @@
             // 
             // tabPageLogin
             // 
-            this.tabPageLogin.Controls.Add(this.LabelConectStatus);
+            this.tabPageLogin.Controls.Add(this.cmboTime);
+            this.tabPageLogin.Controls.Add(this.label6);
             this.tabPageLogin.Controls.Add(this.btnConectar);
             this.tabPageLogin.Controls.Add(this.textBoxPassword);
             this.tabPageLogin.Controls.Add(this.textBoxEmail);
@@ -87,17 +89,6 @@
             this.tabPageLogin.TabIndex = 0;
             this.tabPageLogin.Text = "Login";
             this.tabPageLogin.UseVisualStyleBackColor = true;
-            // 
-            // LabelConectStatus
-            // 
-            this.LabelConectStatus.AutoSize = true;
-            this.LabelConectStatus.Location = new System.Drawing.Point(269, 298);
-            this.LabelConectStatus.Name = "LabelConectStatus";
-            this.LabelConectStatus.Size = new System.Drawing.Size(87, 13);
-            this.LabelConectStatus.TabIndex = 10;
-            this.LabelConectStatus.Text = "soijoasidoasndas";
-            this.LabelConectStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LabelConectStatus.Visible = false;
             // 
             // btnConectar
             // 
@@ -317,6 +308,24 @@
             this.BtnApply.UseVisualStyleBackColor = true;
             this.BtnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(10, 223);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(163, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Tempo de Verificação";
+            // 
+            // cmboTime
+            // 
+            this.cmboTime.FormattingEnabled = true;
+            this.cmboTime.Location = new System.Drawing.Point(179, 225);
+            this.cmboTime.Name = "cmboTime";
+            this.cmboTime.Size = new System.Drawing.Size(105, 21);
+            this.cmboTime.TabIndex = 11;
+            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,7 +378,8 @@
         private System.Windows.Forms.Button btnReloadHD;
         private System.Windows.Forms.Button btnReloadServices;
         private System.Windows.Forms.Button btnConectar;
-        private System.Windows.Forms.Label LabelConectStatus;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmboTime;
 
     }
 }

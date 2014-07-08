@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ServiceProcess;
 using System.Runtime.Serialization;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace DidYouFall.Agent.Info
 {
@@ -22,6 +25,7 @@ namespace DidYouFall.Agent.Info
         public string CpuUsage { get; set; }
         public long PhysicalAvailableMemoryInMiB { get; set; }
         public long GetTotalMemoryInMiB { get; set; }
+        public int CheckTime{ get; set; }
 
         public List<Driver> Drivers { get; set; }
         public List<Service> Services { get; set; }
@@ -37,9 +41,7 @@ namespace DidYouFall.Agent.Info
             CpuUsage = GetCPUUsage(CPU);
             LoadDrivers();
             LoadServices();
-
-
-
+            CheckTime = 5;
         }
 
         public void LoadDrivers()
@@ -63,6 +65,7 @@ namespace DidYouFall.Agent.Info
             }
 
         }
+
         public void LoadServices()
         {
             Services.Clear();
@@ -73,6 +76,42 @@ namespace DidYouFall.Agent.Info
 
         }
 
+        public void SendInformation()
+        {
+            try
+            {
+                PerformanceCounter CPU = new PerformanceCounter();
+                var monitoratedDrivers = this.Drivers.Where(i => i.Monitoring == true).ToList();
+                var monitoratedServices = this.Services.Where(i => i.Monitoring == true).ToList();
+                var pcIntoToSend = new PC()
+                {
+                    Server = this.Server,
+                    Email = this.Email,
+                    Password = this.Password,
+                    ComputarName = SystemInformation.ComputerName,
+                    Drivers = monitoratedDrivers,
+                    Services = monitoratedServices,
+
+                    PhysicalAvailableMemoryInMiB = PerformanceInfo.GetPhysicalAvailableMemoryInMiB(),
+                    GetTotalMemoryInMiB = PerformanceInfo.GetTotalMemoryInMiB(),
+                    CpuUsage = GetCPUUsage(CPU)
+                };
+                var jsonPcInfo = JsonConvert.SerializeObject(pcIntoToSend);
+
+                WebClient client = new WebClient();
+                var values = new NameValueCollection();
+                values["JsonPcInfo"] = jsonPcInfo;
+                var response = client.UploadValues("http://" + pcIntoToSend.Server + "/agent/PcInfo", "POST", values);
+                var responseString = Encoding.Default.GetString(response);
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         private void DriverCheck()
         {
             var ActiveDrivers = Drivers.Where(i => i.Monitoring == true).Select(i => i.Volume);

@@ -17,6 +17,11 @@ namespace DidYouFall.Agent.Forms
 {
     public partial class Configuration : Form
     {
+        public class ComboBoxItem
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+        }
         public PC PcInfo { get; set; }
         ConfigurationController config = new ConfigurationController();
         public Configuration(PC pcInfo)
@@ -26,6 +31,20 @@ namespace DidYouFall.Agent.Forms
             InitServerConfig(pcInfo);
             InitCheckListHDs(PcInfo);
             InitChrckListServices(PcInfo);
+
+
+            var count = 0;
+            for (int i = 5; i < 60; i = i + 5)
+            {
+                var comnboitem = new ComboBoxItem() { Text = i + " Minutos", Value = i };
+                cmboTime.Items.Add(comnboitem);
+                cmboTime.DisplayMember = "Text";
+                if (pcInfo.CheckTime == i)
+                    cmboTime.SelectedIndex = count;
+                count++;
+            }
+            
+
 
         }
 
@@ -95,26 +114,30 @@ namespace DidYouFall.Agent.Forms
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
+            ComboBoxItem selectedItemOnCombo = (ComboBoxItem)cmboTime.SelectedItem;
             config.ApplyConfig(
                 PcInfo,
                 textBoxServer,
                 textBoxEmail,
                 textBoxPassword,
                 checkedListBoxHDs,
-                checkedListBoxServices
+                checkedListBoxServices,
+                selectedItemOnCombo.Value
                 );
 
         }
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
+            ComboBoxItem selectedItemOnCombo = (ComboBoxItem)cmboTime.SelectedItem;
             config.ApplyConfig(
                 PcInfo,
                 textBoxServer,
                 textBoxEmail,
                 textBoxPassword,
                 checkedListBoxHDs,
-                checkedListBoxServices
+                checkedListBoxServices,
+                selectedItemOnCombo.Value
                 );
 
             this.Dispose();
@@ -124,6 +147,7 @@ namespace DidYouFall.Agent.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             FileController.LoadConfig();
+            this.Dispose();
         }
 
         private void btnReloadHD_Click(object sender, EventArgs e)

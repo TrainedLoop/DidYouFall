@@ -19,6 +19,7 @@ namespace DidYouFall.Agent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FileController.LoadConfig();
+           // PcInfo.SendInformation();
             using (AgentIcon agentIcon = new AgentIcon())
             {
                 agentIcon.Display();

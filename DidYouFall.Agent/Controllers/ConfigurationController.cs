@@ -13,11 +13,12 @@ namespace DidYouFall.Agent.Controllers
 {
     public class ConfigurationController
     {
-        public void ApplyConfig(PC pcInfo, TextBox textBoxServer, TextBox textBoxEmail, TextBox textBoxPassword, CheckedListBox checkedListBoxHDs, CheckedListBox checkedListBoxServices)
+        public void ApplyConfig(PC pcInfo, TextBox textBoxServer, TextBox textBoxEmail, TextBox textBoxPassword, CheckedListBox checkedListBoxHDs, CheckedListBox checkedListBoxServices, int Time)
         {
             pcInfo.Server = textBoxServer.Text;
             pcInfo.Email = textBoxEmail.Text;
             pcInfo.Password = textBoxPassword.Text;
+            pcInfo.CheckTime = Time;
             foreach (var item in pcInfo.Drivers)
             {
                 item.Monitoring = false;
@@ -46,7 +47,7 @@ namespace DidYouFall.Agent.Controllers
                 values["email"] = email;
                 values["password"] = password;
                 //string post = "email="+PcInfo.Email+"&password="+PcInfo.Password;
-                var response = client.UploadValues("http://" + server + "/agent/AgentConfigConection", "POST", values);
+                var response = client.UploadValues("http://" + server + "/agent/ConfigConection", "POST", values);
                 var responseString = Encoding.Default.GetString(response);
                 return JsonConvert.DeserializeObject<string>(responseString);
                 

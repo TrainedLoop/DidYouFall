@@ -200,6 +200,12 @@
     <Folder Include="Views\Agent\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DidYouFall.Agent\DidYouFall.Agent.csproj">
+      <Project>{8e477762-e3f7-4d65-9779-1b83016dd3a0}</Project>
+      <Name>DidYouFall.Agent</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
