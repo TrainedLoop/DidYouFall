@@ -31,8 +31,14 @@ namespace DidYouFall.Agent.Forms
             InitServerConfig(pcInfo);
             InitCheckListHDs(PcInfo);
             InitChrckListServices(PcInfo);
+            InitCheckTimeCombo(pcInfo);
+            
 
 
+        }
+
+        private void InitCheckTimeCombo(PC pcInfo)
+        {
             var count = 0;
             for (int i = 5; i < 60; i = i + 5)
             {
@@ -43,9 +49,6 @@ namespace DidYouFall.Agent.Forms
                     cmboTime.SelectedIndex = count;
                 count++;
             }
-            
-
-
         }
 
         private void InitServerConfig(PC pcInfo)

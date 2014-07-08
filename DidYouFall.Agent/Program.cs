@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DidYouFall.Agent.Controllers;
@@ -19,7 +20,8 @@ namespace DidYouFall.Agent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FileController.LoadConfig();
-           // PcInfo.SendInformation();
+            Thread checker = new Thread(new ThreadStart(PcInfo.SendInformation));
+            checker.Start();
             using (AgentIcon agentIcon = new AgentIcon())
             {
                 agentIcon.Display();

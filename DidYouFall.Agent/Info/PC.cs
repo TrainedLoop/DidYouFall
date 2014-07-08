@@ -12,6 +12,7 @@ using System.Runtime.Serialization;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
 using System.Net;
+using System.Threading;
 
 namespace DidYouFall.Agent.Info
 {
@@ -25,7 +26,7 @@ namespace DidYouFall.Agent.Info
         public string CpuUsage { get; set; }
         public long PhysicalAvailableMemoryInMiB { get; set; }
         public long GetTotalMemoryInMiB { get; set; }
-        public int CheckTime{ get; set; }
+        public int CheckTime { get; set; }
 
         public List<Driver> Drivers { get; set; }
         public List<Service> Services { get; set; }
@@ -78,37 +79,40 @@ namespace DidYouFall.Agent.Info
 
         public void SendInformation()
         {
-            try
+            while (true)
             {
-                PerformanceCounter CPU = new PerformanceCounter();
-                var monitoratedDrivers = this.Drivers.Where(i => i.Monitoring == true).ToList();
-                var monitoratedServices = this.Services.Where(i => i.Monitoring == true).ToList();
-                var pcIntoToSend = new PC()
+                try
                 {
-                    Server = this.Server,
-                    Email = this.Email,
-                    Password = this.Password,
-                    ComputarName = SystemInformation.ComputerName,
-                    Drivers = monitoratedDrivers,
-                    Services = monitoratedServices,
+                    PerformanceCounter CPU = new PerformanceCounter();
+                    var monitoratedDrivers = this.Drivers.Where(i => i.Monitoring == true).ToList();
+                    var monitoratedServices = this.Services.Where(i => i.Monitoring == true).ToList();
+                    var pcIntoToSend = new PC()
+                    {
+                        Server = this.Server,
+                        Email = this.Email,
+                        Password = this.Password,
+                        ComputarName = SystemInformation.ComputerName,
+                        Drivers = monitoratedDrivers,
+                        Services = monitoratedServices,
 
-                    PhysicalAvailableMemoryInMiB = PerformanceInfo.GetPhysicalAvailableMemoryInMiB(),
-                    GetTotalMemoryInMiB = PerformanceInfo.GetTotalMemoryInMiB(),
-                    CpuUsage = GetCPUUsage(CPU)
-                };
-                var jsonPcInfo = JsonConvert.SerializeObject(pcIntoToSend);
+                        PhysicalAvailableMemoryInMiB = PerformanceInfo.GetPhysicalAvailableMemoryInMiB(),
+                        GetTotalMemoryInMiB = PerformanceInfo.GetTotalMemoryInMiB(),
+                        CpuUsage = GetCPUUsage(CPU)
+                    };
+                    var jsonPcInfo = JsonConvert.SerializeObject(pcIntoToSend);
 
-                WebClient client = new WebClient();
-                var values = new NameValueCollection();
-                values["JsonPcInfo"] = jsonPcInfo;
-                var response = client.UploadValues("http://" + pcIntoToSend.Server + "/agent/PcInfo", "POST", values);
-                var responseString = Encoding.Default.GetString(response);
+                    WebClient client = new WebClient();
+                    var values = new NameValueCollection();
+                    values["JsonPcInfo"] = jsonPcInfo;
+                    var response = client.UploadValues("http://" + pcIntoToSend.Server + "/agent/PcInfo", "POST", values);
+                    var responseString = Encoding.Default.GetString(response);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                Thread.Sleep(this.CheckTime * 60 * 1000);
 
-
-            }
-            catch (Exception)
-            {
-                throw;
             }
 
         }
