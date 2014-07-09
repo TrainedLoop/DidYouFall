@@ -10,7 +10,7 @@ namespace DidYouFall.Controllers
 {
     public class AgentController : Controller
     {
-        public class PC
+        public class PCInfoPost
         {
             public string Server { get; set; }
             public string Email { get; set; }
@@ -61,7 +61,7 @@ namespace DidYouFall.Controllers
 
         public ActionResult PcInfo(string JsonPcInfo)
         {
-            var pcInfo = JsonConvert.DeserializeObject<PC>(JsonPcInfo);
+            var pcInfo = JsonConvert.DeserializeObject<PCInfoPost>(JsonPcInfo);
             Login login = new Login();
             try
             {

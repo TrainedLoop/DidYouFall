@@ -153,11 +153,17 @@
     <Compile Include="Models\Forms\Validations\Inputs.cs" />
     <Compile Include="Models\ProjectConfigs.cs" />
     <Compile Include="Models\Utilities\ServerUtilities.cs" />
+    <Compile Include="Repository\Driver.cs" />
+    <Compile Include="Repository\Maps\AgentInfoMap.cs" />
+    <Compile Include="Repository\Maps\DriverMap.cs" />
     <Compile Include="Repository\Maps\ServerLogMap.cs" />
     <Compile Include="Repository\Maps\ServerMap.cs" />
+    <Compile Include="Repository\Maps\ServiceMap.cs" />
     <Compile Include="Repository\Maps\UserMap.cs" />
+    <Compile Include="Repository\AgentInfo.cs" />
     <Compile Include="Repository\Server.cs" />
     <Compile Include="Repository\ServerLog.cs" />
+    <Compile Include="Repository\Service.cs" />
     <Compile Include="Repository\User.cs" />
     <Compile Include="Models\Utilities\UsersUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

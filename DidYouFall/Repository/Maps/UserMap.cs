@@ -20,6 +20,9 @@ namespace DidYouFall.Repository.Maps
             HasMany(x => x.Servers)
                 .AsBag()
                 .Cascade.All();
+            HasMany(x => x.AgentsInfo)
+                .AsBag()
+                .Cascade.All();
         }
     }
 }
