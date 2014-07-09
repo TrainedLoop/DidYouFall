@@ -128,6 +128,7 @@
     <Content Include="JavaScripts\Plugins\Countdown\countdown.js" />
     <Content Include="JavaScripts\Plugins\Mask\IpMaskInt.js" />
     <Content Include="JavaScripts\Plugins\Mask\mask-plugin.js" />
+    <Content Include="JavaScripts\Plugins\Sparkline\jquery.sparkline.min.js" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -195,6 +196,7 @@
     <Content Include="Views\Server\ShowServers.cshtml" />
     <Content Include="Views\Reports\ServerLog.cshtml" />
     <None Include="Properties\PublishProfiles\taon.danielporto.net - Web Deploy.pubxml" />
+    <Content Include="Views\Agent\AgentPcs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -204,7 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Agent\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <PropertyGroup>

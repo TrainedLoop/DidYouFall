@@ -21,11 +21,17 @@ namespace DidYouFall.App_Start
             bundles.Add(new StyleBundle("~/Css/BaseLayout").Include(
             "~/Css/Layout/bootstrap.min.css",
             "~/Fonts/font-awesome.min.css",
-            "~/Css/Layout/ionicons.min.css",            
+            "~/Css/Layout/ionicons.min.css",
             "~/Css/Layout/AdminLTE.css",
             "~/Css/Layout/Custom.css"
 
             ));
+
+            //Pie GRAPH
+            bundles.Add(new ScriptBundle("~/Js/Plugins/Sparkline").Include(
+            "~/JavaScripts/Plugins/Sparkline/jquery.sparkline.min.js"
+            ));
+
 
             //SERVER REGISTER
             bundles.Add(new ScriptBundle("~/Js/Plugins/IpMask").Include(

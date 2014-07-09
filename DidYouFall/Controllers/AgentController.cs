@@ -12,11 +12,6 @@ namespace DidYouFall.Controllers
 {
     public class AgentController : Controller
     {
-        
-
-
-
-
         // GET: Agent
         public ActionResult ConfigConection(string email, string password)
         {
@@ -52,6 +47,12 @@ namespace DidYouFall.Controllers
             }
         }
 
-        
+        public ActionResult AgentPcs()
+        {
+            var user = UsersUtilities.GetLoggedUser();
+            if (user== null)
+                return Redirect("~/User/Login");
+            return View(user.AgentsInfo);
+        }
     }
 }
