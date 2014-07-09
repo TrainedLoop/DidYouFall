@@ -14,6 +14,8 @@ namespace DidYouFall.Repository
         public virtual long PhysicalAvailableMemoryInMiB { get; set; }
         public virtual long GetTotalMemoryInMiB { get; set; }
         public virtual string ContactEmail { get; set; }
+        public virtual DateTime LastCheck { get; set; }
+        public virtual User User { get; set; }
         public virtual IList<Driver> Drivers { get; set; }
         public virtual IList<Service> Services { get; set; }
     }

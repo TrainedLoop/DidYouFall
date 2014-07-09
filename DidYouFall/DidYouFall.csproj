@@ -152,6 +152,7 @@
     <Compile Include="Models\Forms\Validations\DataBase.cs" />
     <Compile Include="Models\Forms\Validations\Inputs.cs" />
     <Compile Include="Models\ProjectConfigs.cs" />
+    <Compile Include="Models\Utilities\AgentUtilities.cs" />
     <Compile Include="Models\Utilities\ServerUtilities.cs" />
     <Compile Include="Repository\Driver.cs" />
     <Compile Include="Repository\Maps\AgentInfoMap.cs" />
@@ -205,12 +206,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Agent\" />
     <Folder Include="Views\Login\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DidYouFall.Agent\DidYouFall.Agent.csproj">
-      <Project>{8e477762-e3f7-4d65-9779-1b83016dd3a0}</Project>
-      <Name>DidYouFall.Agent</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

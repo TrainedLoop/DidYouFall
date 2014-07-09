@@ -4,43 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DidYouFall.Models.Forms;
+using DidYouFall.Models.Utilities;
+using DidYouFall.Repository;
 using Newtonsoft.Json;
 
 namespace DidYouFall.Controllers
 {
     public class AgentController : Controller
     {
-        public class PCInfoPost
-        {
-            public string Server { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; }
-            public string ComputarName { get; set; }
-            public string CpuUsage { get; set; }
-            public long PhysicalAvailableMemoryInMiB { get; set; }
-            public long GetTotalMemoryInMiB { get; set; }
+        
 
-            public List<Driver> Drivers { get; set; }
-            public List<Service> Services { get; set; }
-        }
 
-        public class Driver
-        {
-            public string Label { get; set; }
-            public long FreeSpace { get; set; }
-            public long TotalSpace { get; set; }
-            public string Volume { get; set; }
-            public bool Status { get; set; }
-            public string Format { get; set; }
-            public bool Monitoring { get; set; }
-        }
-
-        public class Service
-        {
-            public string Name { get; set; }
-            public string Status { get; set; }
-            public bool Monitoring { get; set; }
-        }
 
 
         // GET: Agent
@@ -61,12 +35,15 @@ namespace DidYouFall.Controllers
 
         public ActionResult PcInfo(string JsonPcInfo)
         {
-            var pcInfo = JsonConvert.DeserializeObject<PCInfoPost>(JsonPcInfo);
+            var pcInfo = JsonConvert.DeserializeObject<AgentUtilities.PCInfoPost>(JsonPcInfo);
             Login login = new Login();
             try
             {
                 login.LoginUser(pcInfo.Email, pcInfo.Password);
-                return Json("de boa", JsonRequestBehavior.AllowGet);
+                var user = UsersUtilities.GetLoggedUser();
+                var agent = new AgentUtilities();
+                agent.UpdatePcInfo(pcInfo, user);
+                return Json("Save Success", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -74,5 +51,7 @@ namespace DidYouFall.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+        
     }
 }

@@ -32,7 +32,7 @@ namespace DidYouFall.Agent.Forms
             InitCheckListHDs(PcInfo);
             InitChrckListServices(PcInfo);
             InitCheckTimeCombo(pcInfo);
-            
+
 
 
         }
@@ -56,12 +56,15 @@ namespace DidYouFall.Agent.Forms
             textBoxServer.Text = PcInfo.Server;
             textBoxEmail.Text = PcInfo.Email;
             textBoxPassword.Text = PcInfo.Password;
+            TextBoxContacEmail.Text = PcInfo.ContactEmail;
             if (String.IsNullOrWhiteSpace(pcInfo.Server))
                 textBoxServer.Text = "taon.danielporto.net";
             if (String.IsNullOrWhiteSpace(pcInfo.Email))
                 textBoxEmail.Text = "seuemail@dominio.com";
             if (String.IsNullOrWhiteSpace(pcInfo.Password))
                 textBoxPassword.Text = "123456";
+            if (String.IsNullOrWhiteSpace(pcInfo.ContactEmail))
+                TextBoxContacEmail.Text = "seuemail@dominio.com";
         }
 
         private void InitChrckListServices(PC pcInfo)
@@ -123,6 +126,7 @@ namespace DidYouFall.Agent.Forms
                 textBoxServer,
                 textBoxEmail,
                 textBoxPassword,
+                TextBoxContacEmail,
                 checkedListBoxHDs,
                 checkedListBoxServices,
                 selectedItemOnCombo.Value
@@ -138,6 +142,7 @@ namespace DidYouFall.Agent.Forms
                 textBoxServer,
                 textBoxEmail,
                 textBoxPassword,
+                TextBoxContacEmail,
                 checkedListBoxHDs,
                 checkedListBoxServices,
                 selectedItemOnCombo.Value

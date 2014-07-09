@@ -30,6 +30,8 @@
         {
             this.tabControlConfig = new System.Windows.Forms.TabControl();
             this.tabPageLogin = new System.Windows.Forms.TabPage();
+            this.cmboTime = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnConectar = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
@@ -52,8 +54,8 @@
             this.BtnOK = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnApply = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmboTime = new System.Windows.Forms.ComboBox();
+            this.TextBoxContacEmail = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControlConfig.SuspendLayout();
             this.tabPageLogin.SuspendLayout();
             this.tabPageHdMonitor.SuspendLayout();
@@ -73,6 +75,8 @@
             // 
             // tabPageLogin
             // 
+            this.tabPageLogin.Controls.Add(this.label7);
+            this.tabPageLogin.Controls.Add(this.TextBoxContacEmail);
             this.tabPageLogin.Controls.Add(this.cmboTime);
             this.tabPageLogin.Controls.Add(this.label6);
             this.tabPageLogin.Controls.Add(this.btnConectar);
@@ -90,6 +94,24 @@
             this.tabPageLogin.Text = "Login";
             this.tabPageLogin.UseVisualStyleBackColor = true;
             // 
+            // cmboTime
+            // 
+            this.cmboTime.FormattingEnabled = true;
+            this.cmboTime.Location = new System.Drawing.Point(197, 269);
+            this.cmboTime.Name = "cmboTime";
+            this.cmboTime.Size = new System.Drawing.Size(142, 21);
+            this.cmboTime.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(17, 267);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(163, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Tempo de Verificação";
+            // 
             // btnConectar
             // 
             this.btnConectar.Location = new System.Drawing.Point(280, 327);
@@ -102,24 +124,24 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(81, 171);
+            this.textBoxPassword.Location = new System.Drawing.Point(27, 165);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '●';
-            this.textBoxPassword.Size = new System.Drawing.Size(275, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(312, 20);
             this.textBoxPassword.TabIndex = 8;
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(81, 119);
+            this.textBoxEmail.Location = new System.Drawing.Point(27, 109);
             this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(275, 20);
+            this.textBoxEmail.Size = new System.Drawing.Size(312, 20);
             this.textBoxEmail.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 117);
+            this.label2.Location = new System.Drawing.Point(17, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 20);
             this.label2.TabIndex = 6;
@@ -129,7 +151,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 169);
+            this.label4.Location = new System.Drawing.Point(17, 142);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 20);
             this.label4.TabIndex = 5;
@@ -137,16 +159,16 @@
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(81, 62);
+            this.textBoxServer.Location = new System.Drawing.Point(27, 53);
             this.textBoxServer.Name = "textBoxServer";
-            this.textBoxServer.Size = new System.Drawing.Size(275, 20);
+            this.textBoxServer.Size = new System.Drawing.Size(312, 20);
             this.textBoxServer.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 60);
+            this.label1.Location = new System.Drawing.Point(16, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 0;
@@ -308,23 +330,22 @@
             this.BtnApply.UseVisualStyleBackColor = true;
             this.BtnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
-            // label6
+            // TextBoxContacEmail
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(10, 223);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(163, 20);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Tempo de Verificação";
+            this.TextBoxContacEmail.Location = new System.Drawing.Point(27, 224);
+            this.TextBoxContacEmail.Name = "TextBoxContacEmail";
+            this.TextBoxContacEmail.Size = new System.Drawing.Size(312, 20);
+            this.TextBoxContacEmail.TabIndex = 12;
             // 
-            // cmboTime
+            // label7
             // 
-            this.cmboTime.FormattingEnabled = true;
-            this.cmboTime.Location = new System.Drawing.Point(179, 225);
-            this.cmboTime.Name = "cmboTime";
-            this.cmboTime.Size = new System.Drawing.Size(105, 21);
-            this.cmboTime.TabIndex = 11;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(17, 201);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(131, 20);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Email de Contato";
             // 
             // Configuration
             // 
@@ -380,6 +401,8 @@
         private System.Windows.Forms.Button btnConectar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmboTime;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TextBoxContacEmail;
 
     }
 }

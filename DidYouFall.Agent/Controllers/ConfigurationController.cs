@@ -13,12 +13,13 @@ namespace DidYouFall.Agent.Controllers
 {
     public class ConfigurationController
     {
-        public void ApplyConfig(PC pcInfo, TextBox textBoxServer, TextBox textBoxEmail, TextBox textBoxPassword, CheckedListBox checkedListBoxHDs, CheckedListBox checkedListBoxServices, int Time)
+        public void ApplyConfig(PC pcInfo, TextBox textBoxServer, TextBox textBoxEmail, TextBox textBoxPassword,TextBox TextboxContactEmail, CheckedListBox checkedListBoxHDs, CheckedListBox checkedListBoxServices, int Time)
         {
             pcInfo.Server = textBoxServer.Text;
             pcInfo.Email = textBoxEmail.Text;
             pcInfo.Password = textBoxPassword.Text;
             pcInfo.CheckTime = Time;
+            pcInfo.ContactEmail = TextboxContactEmail.Text;
             foreach (var item in pcInfo.Drivers)
             {
                 item.Monitoring = false;

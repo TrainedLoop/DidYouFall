@@ -19,6 +19,7 @@ namespace DidYouFall.Agent.Info
     [Serializable()]
     public class PC
     {
+        public string ContactEmail { get; set; }
         public string Server { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -90,6 +91,7 @@ namespace DidYouFall.Agent.Info
                     {
                         Server = this.Server,
                         Email = this.Email,
+                        ContactEmail = this.ContactEmail,
                         Password = this.Password,
                         ComputarName = SystemInformation.ComputerName,
                         Drivers = monitoratedDrivers,
