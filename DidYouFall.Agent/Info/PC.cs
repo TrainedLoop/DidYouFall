@@ -109,9 +109,9 @@ namespace DidYouFall.Agent.Info
                     var response = client.UploadValues("http://" + pcIntoToSend.Server + "/agent/PcInfo", "POST", values);
                     var responseString = Encoding.Default.GetString(response);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    MessageBox.Show(ex.Message);
                 }
                 Thread.Sleep(this.CheckTime * 60 * 1000);
 

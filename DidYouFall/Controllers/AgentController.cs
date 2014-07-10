@@ -52,7 +52,7 @@ namespace DidYouFall.Controllers
             var user = UsersUtilities.GetLoggedUser();
             if (user== null)
                 return Redirect("~/User/Login");
-            return View(user.AgentsInfo);
+            return View(user.AgentsInfo.ToList());
         }
     }
 }

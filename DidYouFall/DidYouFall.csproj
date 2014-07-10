@@ -116,6 +116,12 @@
     <Content Include="Css\Layout\AdminLTE.css" />
     <Content Include="Css\Layout\bootstrap.min.css" />
     <Content Include="Css\Layout\Custom.css" />
+    <Content Include="Css\Plugins\DataTable\dataTables.bootstrap.css" />
+    <Content Include="Css\Plugins\DataTable\images\sort_asc.png" />
+    <Content Include="Css\Plugins\DataTable\images\sort_asc_disabled.png" />
+    <Content Include="Css\Plugins\DataTable\images\sort_both.png" />
+    <Content Include="Css\Plugins\DataTable\images\sort_desc.png" />
+    <Content Include="Css\Plugins\DataTable\images\sort_desc_disabled.png" />
     <Content Include="Fonts\font-awesome.min.css" />
     <Content Include="Css\Layout\ionicons.min.css" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
@@ -126,8 +132,12 @@
     <Content Include="JavaScripts\Layout\bootstrap.min.js" />
     <Content Include="JavaScripts\Layout\jquery-1.11.1.min.js" />
     <Content Include="JavaScripts\Plugins\Countdown\countdown.js" />
+    <Content Include="JavaScripts\Plugins\DataTable\dataTables.bootstrap.js" />
+    <Content Include="JavaScripts\Plugins\DataTable\InitDataTable.js" />
+    <Content Include="JavaScripts\Plugins\DataTable\jquery.dataTables.js" />
     <Content Include="JavaScripts\Plugins\Mask\IpMaskInt.js" />
     <Content Include="JavaScripts\Plugins\Mask\mask-plugin.js" />
+    <Content Include="JavaScripts\Plugins\Sparkline\InitRamPie.js" />
     <Content Include="JavaScripts\Plugins\Sparkline\jquery.sparkline.min.js" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Web.config" />
