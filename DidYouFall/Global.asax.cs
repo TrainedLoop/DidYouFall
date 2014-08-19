@@ -24,7 +24,7 @@ namespace DidYouFall
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
+#if(DEBUG)
             SessionFactory = Fluently.Configure()
               .Database(
                 MySQLConfiguration.Standard.ConnectionString
@@ -37,6 +37,19 @@ namespace DidYouFall
 
             log4net.Config.XmlConfigurator.Configure();
         }
+#endif
+        #if(!DEBUG)
+                    SessionFactory = Fluently.Configure()
+              .Database(
+                MySQLConfiguration.Standard.ConnectionString
+                ("Server=50.62.209.88;Database=didyoufall;Uid=didyoufall;Pwd=96558618;"))
+                .Mappings(i => i.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
+                .ExposeConfiguration(c => c.SetProperty("current_session_context_class", "web"))
+                .ExposeConfiguration(c => c.Properties.Add("hbm2ddl.keywords", "none"))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(true, true))
+                .BuildSessionFactory();
+        }
+#endif
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {

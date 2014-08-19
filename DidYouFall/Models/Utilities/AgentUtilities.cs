@@ -56,7 +56,7 @@ namespace DidYouFall.Models.Utilities
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
 
@@ -73,18 +73,21 @@ namespace DidYouFall.Models.Utilities
 
         private void AddServiceInfo(PCInfoPost pcInfo, AgentInfo DbPcInfo)
         {
-            foreach (var item in pcInfo.Services.Where(i => i.Monitoring == true))
+            foreach (var item in pcInfo.Services)
             {
                 var dbServices = DbPcInfo.Services.Where(i => i.Name == item.Name).SingleOrDefault();
                 if (dbServices != null)
                 {
                     if (item.Monitoring == true)
                     {
-                        DbPcInfo.Services.Remove(dbServices);
-                        DbPcInfo.Services.Add(item);
+                        dbServices.Status = item.Status;
+                    }
+                    else
+                    {
+                        dbServices.Monitoring = false;
                     }
                 }
-                else
+                else if (item.Monitoring)
                 {
                     DbPcInfo.Services.Add(item);
                 }
@@ -93,19 +96,27 @@ namespace DidYouFall.Models.Utilities
 
         private void AddDriverInfo(PCInfoPost pcInfo, AgentInfo DbPcInfo)
         {
-            foreach (var item in pcInfo.Drivers.Where(i => i.Monitoring == true))
+            foreach (var item in pcInfo.Drivers)
             {
                 var dbDriver = DbPcInfo.Drivers.Where(i => i.Volume == item.Volume).SingleOrDefault();
                 if (dbDriver != null)
                 {
                     if (item.Monitoring == true)
                     {
-                        DbPcInfo.Drivers.Remove(dbDriver);
-                        DbPcInfo.Drivers.Add(item);
+                        dbDriver.Status = item.Status;
+                        dbDriver.TotalSpace = item.TotalSpace;
+                        dbDriver.Format = item.Format;
+                        dbDriver.FreeSpace = item.FreeSpace;
+                        dbDriver.Volume = item.Volume;
+                    }
+                    else
+                    {
+                        dbDriver.Monitoring = false;
                     }
                 }
-                else
+                else if (item.Monitoring)
                 {
+
                     DbPcInfo.Drivers.Add(item);
                 }
             }

@@ -86,7 +86,15 @@ namespace DidYouFall.Agent.Info
                 {
                     PerformanceCounter CPU = new PerformanceCounter();
                     var monitoratedDrivers = this.Drivers.Where(i => i.Monitoring == true).ToList();
+                    foreach (var item in this.Drivers.Where(i => i.Monitoring == false).ToList())
+                    {
+                        monitoratedDrivers.Add(new Driver { Volume = item.Volume, Monitoring = item.Monitoring });
+                    }
                     var monitoratedServices = this.Services.Where(i => i.Monitoring == true).ToList();
+                    foreach (var item in this.Services.Where(i => i.Monitoring == false).ToList())
+                    {
+                        monitoratedServices.Add(new Service {  Name = item.Name, Monitoring = item.Monitoring });
+                    }
                     var pcIntoToSend = new PC()
                     {
                         Server = this.Server,
